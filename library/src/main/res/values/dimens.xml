@@ -1,0 +1,4 @@
+<resources>
+	<dimen name="cmtp_timepicker_width">250dp</dimen>
+	<dimen name="cmtp_timepicker_height">130dp</dimen>
+</resources>

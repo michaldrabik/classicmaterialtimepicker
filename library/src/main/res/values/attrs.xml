@@ -1,0 +1,12 @@
+<resources>
+	<attr name="cmtpTextFrameColor" format="reference|color" />
+	<attr name="cmtpTextFrameWidth" format="dimension" />
+	<attr name="cmtpTextFrameCornerRadius" format="dimension" />
+
+	<attr name="cmtpTextSize" format="dimension" />
+	<attr name="cmtpTextColor" format="reference|color" />
+
+	<attr name="cmtpDialogFrameStyle" format="reference" />
+	<attr name="cmtpDialogFrameCornerRadius" format="dimension" />
+	<attr name="cmtpDialogFrameBackgroundColor" format="reference|color" />
+</resources>

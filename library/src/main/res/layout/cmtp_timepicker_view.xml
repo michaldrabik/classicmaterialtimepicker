@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="wrap_content"
+	android:theme="@style/CmtpViewTheme"
+	tools:parentTag="android.widget.FrameLayout"
+	>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="@dimen/cmtp_timepicker_height"
+		android:layout_gravity="center"
+		android:gravity="center"
+		android:orientation="horizontal"
+		>
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/cmtpRecyclerHours"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:overScrollMode="never"
+			/>
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="1dp"
+			android:text=":"
+			android:textColor="?attr/cmtpTextColor"
+			android:textSize="?attr/cmtpTextSize"
+			android:theme="@style/CmtpViewTheme.Text"
+			tools:ignore="HardcodedText"
+			/>
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/cmtpRecyclerMinutes"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:overScrollMode="never"
+			/>
+
+		<androidx.recyclerview.widget.RecyclerView
+			android:id="@+id/cmtpRecyclerPmAm"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:clipToPadding="false"
+			android:overScrollMode="never"
+			android:visibility="gone"
+			/>
+
+	</LinearLayout>
+
+	<View
+		android:layout_width="match_parent"
+		android:layout_height="38dp"
+		android:layout_gravity="center"
+		android:layout_marginLeft="24dp"
+		android:layout_marginRight="24dp"
+		android:background="@drawable/cmtp_bg_frame"
+		android:theme="@style/CmtpViewTheme.TextFrame"
+		/>
+
+</merge>
