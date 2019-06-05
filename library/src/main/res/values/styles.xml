@@ -18,7 +18,7 @@
 	<style name="CmtpDialogFrameStyle" parent="CmtpDialogTheme" />
 
 	<style name="CmtpDialogPositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
-		<item name="android:textColor">@color/cmtp_indigo</item>
+		<item name="android:textColor">@color/cmtp_blue</item>
 	</style>
 
 	<style name="CmtpDialogNegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
