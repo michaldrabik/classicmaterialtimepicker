@@ -44,7 +44,6 @@ class CmtpDialogFragment : DialogFragment() {
     super.onResume()
     dialog.window?.let {
       val width = resources.getDimensionPixelSize(R.dimen.cmtp_timepicker_width)
-      it.setBackgroundDrawableResource(R.drawable.cmtp_bg_dialog)
       it.setLayout(width, WRAP_CONTENT)
     }
   }

@@ -15,9 +15,9 @@
 		android:layout_marginTop="8dp"
 		android:layout_marginRight="16dp"
 		android:layout_marginBottom="8dp"
-		android:textColor="?attr/cmtpTextColor"
-		android:textSize="?attr/cmtpTextSize"
-		android:theme="@style/CmtpViewTheme.Text"
+		android:textColor="?cmtpTextColor"
+		android:textSize="?cmtpTextSize"
+		android:theme="@style/CmtpViewTheme"
 		tools:text="99"
 		/>
 

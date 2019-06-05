@@ -1,27 +1,18 @@
 <resources>
 
 	<style name="CmtpViewTheme">
-		<item name="cmtpTextFrameColor">@color/cmtp_indigo</item>
-		<item name="cmtpTextFrameWidth">1dp</item>
-		<item name="cmtpTextFrameCornerRadius">8dp</item>
-
+		<item name="cmtpTextFrameDrawable">@drawable/cmtp_bg_frame</item>
 		<item name="cmtpTextSize">16sp</item>
 		<item name="cmtpTextColor">@color/cmtp_black</item>
 	</style>
-
-	<style name="CmtpViewTheme.TextFrame" parent="CmtpViewTheme" />
-
-	<style name="CmtpViewTheme.Text" parent="CmtpViewTheme" />
 
 	<!-- Dialog -->
 
 	<style name="CmtpDialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
 		<item name="cmtpDialogFrameStyle">@style/CmtpDialogFrameStyle</item>
-		<item name="cmtpDialogFrameBackgroundColor">@color/cmtp_white</item>
-		<item name="cmtpDialogFrameCornerRadius">16dp</item>
-
 		<item name="buttonBarPositiveButtonStyle">@style/CmtpDialogPositiveButtonStyle</item>
 		<item name="buttonBarNegativeButtonStyle">@style/CmtpDialogNegativeButtonStyle</item>
+		<item name="android:windowBackground">@drawable/cmtp_bg_dialog</item>
 	</style>
 
 	<style name="CmtpDialogFrameStyle" parent="CmtpDialogTheme" />

@@ -4,8 +4,8 @@
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
-	android:theme="@style/CmtpViewTheme"
 	tools:parentTag="android.widget.FrameLayout"
+	tools:theme="@style/CmtpViewTheme"
 	>
 
 	<LinearLayout
@@ -29,9 +29,9 @@
 			android:layout_height="wrap_content"
 			android:layout_marginBottom="1dp"
 			android:text=":"
-			android:textColor="?attr/cmtpTextColor"
-			android:textSize="?attr/cmtpTextSize"
-			android:theme="@style/CmtpViewTheme.Text"
+			android:textColor="?cmtpTextColor"
+			android:textSize="?cmtpTextSize"
+			android:theme="@style/CmtpViewTheme"
 			tools:ignore="HardcodedText"
 			/>
 
@@ -60,8 +60,7 @@
 		android:layout_gravity="center"
 		android:layout_marginLeft="24dp"
 		android:layout_marginRight="24dp"
-		android:background="@drawable/cmtp_bg_frame"
-		android:theme="@style/CmtpViewTheme.TextFrame"
+		android:background="?cmtpTextFrameDrawable"
 		/>
 
 </merge>

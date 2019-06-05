@@ -2,8 +2,8 @@
 <shape
 	xmlns:android="http://schemas.android.com/apk/res/android">
 	<stroke
-		android:width="?attr/cmtpTextFrameWidth"
-		android:color="?attr/cmtpTextFrameColor"
+		android:width="1dp"
+		android:color="@color/cmtp_indigo"
 		/>
-	<corners android:radius="?attr/cmtpTextFrameCornerRadius" />
+	<corners android:radius="8dp" />
 </shape>
