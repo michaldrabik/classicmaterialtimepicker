@@ -4,7 +4,8 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.michaldrabik.classicmaterialtimepicker.CmtpDialogFragment
-import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime24
+import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime12
+import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime12.PmAm.PM
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,9 +18,9 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun showTimePickerDialog() {
-    val dialog = CmtpDialogFragment.newInstance("Hello", "Bye")
-    dialog.setInitialTime(CmtpTime24(12, 0))
-    dialog.setOnTime24PickedListener {
+    val dialog = CmtpDialogFragment.newInstance("Pos", "Neg")
+    dialog.setInitialTime(CmtpTime12(5, 15, PM))
+    dialog.setOnTime12PickedListener {
       Log.d("TIME", it.toString())
     }
     dialog.show(supportFragmentManager, "TimePicker")

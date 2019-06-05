@@ -7,7 +7,9 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime12
+import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime12.PmAm.PM
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime24
+import com.michaldrabik.classicmaterialtimepicker.model.CmtpTimeType
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTimeType.HOUR_12
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTimeType.HOUR_24
 
@@ -16,6 +18,10 @@ class CmtpDialogFragment : DialogFragment() {
   companion object {
     private const val ARG_POSITIVE_BUTTON_TEXT = "ARG_POSITIVE_BUTTON_TEXT"
     private const val ARG_NEGATIVE_BUTTON_TEXT = "ARG_NEGATIVE_BUTTON_TEXT"
+    private const val ARG_HOUR = "ARG_HOUR"
+    private const val ARG_MINUTE = "ARG_MINUTE"
+    private const val ARG_PM_AM = "ARG_PM_AM"
+    private const val ARG_TYPE = "ARG_TYPE"
 
     @JvmOverloads
     fun newInstance(
@@ -30,6 +36,7 @@ class CmtpDialogFragment : DialogFragment() {
   }
 
   private lateinit var time: CmtpTime
+  private lateinit var timePicker: CmtpTimePickerView
 
   private var onTime12PickedListener: (CmtpTime12) -> Unit = { }
   private var onTime24PickedListener: (CmtpTime24) -> Unit = { }
@@ -37,7 +44,8 @@ class CmtpDialogFragment : DialogFragment() {
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
     val context = requireContext()
 
-    val timePicker = CmtpTimePickerView(context)
+    timePicker = CmtpTimePickerView(context)
+    savedInstanceState?.let { restoreState(it) }
     if (this::time.isInitialized) timePicker.setInitialTime(time)
 
     val dialogBuilder = AlertDialog.Builder(context, R.style.CmtpDialogFrameStyle)
@@ -57,6 +65,39 @@ class CmtpDialogFragment : DialogFragment() {
     ) { _, _ -> }
 
     return dialogBuilder.create()
+  }
+
+  private fun saveState(outState: Bundle) {
+    if (!this::timePicker.isInitialized) return
+    when (timePicker.getType()) {
+      HOUR_24 -> {
+        outState.putInt(ARG_HOUR, timePicker.getTime24().hour)
+        outState.putInt(ARG_MINUTE, timePicker.getTime24().minute)
+      }
+      HOUR_12 -> {
+        outState.putInt(ARG_HOUR, timePicker.getTime12().hour)
+        outState.putInt(ARG_MINUTE, timePicker.getTime12().minute)
+        outState.putString(ARG_PM_AM, timePicker.getTime12().pmAm.name)
+      }
+    }
+    outState.putString(ARG_TYPE, timePicker.getType().name)
+  }
+
+  private fun restoreState(stateBundle: Bundle) {
+    val type = enumValueOf<CmtpTimeType>(stateBundle.getString(ARG_TYPE)!!)
+    when (type) {
+      HOUR_24 -> {
+        val hour = stateBundle.getInt(ARG_HOUR, 12)
+        val minute = stateBundle.getInt(ARG_MINUTE, 30)
+        time = CmtpTime24(hour, minute)
+      }
+      HOUR_12 -> {
+        val hour = stateBundle.getInt(ARG_HOUR, 6)
+        val minute = stateBundle.getInt(ARG_MINUTE, 30)
+        val pmAm = stateBundle.getString(ARG_PM_AM, PM.name)
+        time = CmtpTime12(hour, minute, enumValueOf(pmAm))
+      }
+    }
   }
 
   override fun onResume() {
@@ -88,5 +129,10 @@ class CmtpDialogFragment : DialogFragment() {
   fun setOnTime24PickedListener(listener: (CmtpTime24) -> Unit) {
     check(time.type == HOUR_24) { "Invalid listener type. Time picker has been initialised as 12-Hour type" }
     this.onTime24PickedListener = listener
+  }
+
+  override fun onSaveInstanceState(outState: Bundle) {
+    super.onSaveInstanceState(outState)
+    saveState(outState)
   }
 }
