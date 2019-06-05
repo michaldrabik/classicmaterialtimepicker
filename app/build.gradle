@@ -23,7 +23,8 @@ android {
 dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
   implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-  implementation project(":library")
+//  implementation project(":library")
+  implementation 'com.github.michaldrabik:classicmaterialtimepicker:0.0.1'
 
   implementation 'androidx.appcompat:appcompat:1.0.2'
   implementation 'androidx.core:core-ktx:1.0.2'
