@@ -33,7 +33,7 @@ class CmtpTimePickerView @JvmOverloads constructor(
   private val recyclerMinutesSnapHelper by lazy { LinearSnapHelper() }
   private val recyclerPmAmSnapHelper by lazy { LinearSnapHelper() }
 
-  private var time: CmtpTime = CmtpTime24(12, 30)
+  private var time: CmtpTime = CmtpTime24.DEFAULT
 
   init {
     inflate(
@@ -105,13 +105,17 @@ class CmtpTimePickerView @JvmOverloads constructor(
   }
 
   /**
-   * Set initial time with 24-Hour or 12-Hour format.
+   * Set time with 24-Hour or 12-Hour format.
    */
-  fun setInitialTime(initialTime: CmtpTime) {
+  fun setTime(initialTime: CmtpTime) {
     time = initialTime
     setupRecyclersData()
   }
 
+  /**
+   * Get selected time in 24-Format.
+   * @throws IllegalStateException will be thrown if CmtpTimePickerView has been initialised with 12-Hour format.
+   */
   fun getTime24(): CmtpTime24 {
     check(time.type == HOUR_24) { "Can't retrieve time in 24-Hour format. TimePicker view was initialised with 12-Hour format." }
 
@@ -130,6 +134,10 @@ class CmtpTimePickerView @JvmOverloads constructor(
     )
   }
 
+  /**
+   * Get selected time in 12-Format.
+   * @throws IllegalStateException will be thrown if CmtpTimePickerView has been initialised with 24-Hour format.
+   */
   fun getTime12(): CmtpTime12 {
     check(time.type == HOUR_12) { "Can't retrieve time in 12-Hour format. TimePicker view was initialised with 24-Hour format." }
 

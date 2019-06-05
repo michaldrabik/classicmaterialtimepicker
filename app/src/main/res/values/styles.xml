@@ -7,4 +7,23 @@
 		<item name="colorAccent">@color/colorAccent</item>
 	</style>
 
+	<!-- Uncomment section below to customize TimePicker-->
+	<!--<style name="CmtpViewTheme">-->
+		<!--<item name="cmtpTextFrameDrawable">@drawable/custom_text_frame</item>-->
+		<!--<item name="cmtpTextSize">14sp</item>-->
+		<!--<item name="cmtpTextColor">#000000</item>-->
+	<!--</style>-->
+
+	<!--<style name="CmtpDialogFrameStyle" parent="CmtpDialogTheme">-->
+		<!--<item name="android:windowBackground">@drawable/custom_dialog_background</item>-->
+	<!--</style>-->
+
+	<!--<style name="CmtpDialogPositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">-->
+		<!--<item name="android:textColor">#FF0000</item>-->
+	<!--</style>-->
+
+	<!--<style name="CmtpDialogNegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">-->
+		<!--<item name="android:textColor">#FF0000</item>-->
+	<!--</style>-->
+
 </resources>

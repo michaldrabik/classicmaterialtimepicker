@@ -9,6 +9,10 @@ data class CmtpTime24(
   override val type: CmtpTimeType = HOUR_24
 ) : CmtpTime {
 
+  companion object {
+    val DEFAULT = CmtpTime24(12, 30)
+  }
+
   init {
     check(hour in CmtpTimeData.HOURS_24) { "Invalid hour. Must be between 0 and 23" }
     check(minute in CmtpTimeData.MINUTES) { "Invalid minute. Must be between 0 and 59" }

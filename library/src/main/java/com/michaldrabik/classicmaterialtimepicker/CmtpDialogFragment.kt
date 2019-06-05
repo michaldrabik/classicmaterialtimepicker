@@ -7,7 +7,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime12
-import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime12.PmAm.PM
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime24
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTimeType
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTimeType.HOUR_12
@@ -23,6 +22,11 @@ class CmtpDialogFragment : DialogFragment() {
     private const val ARG_PM_AM = "ARG_PM_AM"
     private const val ARG_TYPE = "ARG_TYPE"
 
+    /**
+     * Create new instance of CmtpDialogFragment with CmtpTimePickerView embedded.
+     * @param positiveButtonText Custom positive button text. "OK" by default.
+     * @param negativeButtonText Custom negative button text. "CANCEL" by default.
+     */
     @JvmOverloads
     fun newInstance(
       positiveButtonText: String = "OK",
@@ -46,7 +50,7 @@ class CmtpDialogFragment : DialogFragment() {
 
     timePicker = CmtpTimePickerView(context)
     savedInstanceState?.let { restoreState(it) }
-    if (this::time.isInitialized) timePicker.setInitialTime(time)
+    if (this::time.isInitialized) timePicker.setTime(time)
 
     val dialogBuilder = AlertDialog.Builder(context, R.style.CmtpDialogFrameStyle)
     dialogBuilder.setView(timePicker)
@@ -87,14 +91,14 @@ class CmtpDialogFragment : DialogFragment() {
     val type = enumValueOf<CmtpTimeType>(stateBundle.getString(ARG_TYPE)!!)
     when (type) {
       HOUR_24 -> {
-        val hour = stateBundle.getInt(ARG_HOUR, 12)
-        val minute = stateBundle.getInt(ARG_MINUTE, 30)
+        val hour = stateBundle.getInt(ARG_HOUR, CmtpTime24.DEFAULT.hour)
+        val minute = stateBundle.getInt(ARG_MINUTE, CmtpTime24.DEFAULT.minute)
         time = CmtpTime24(hour, minute)
       }
       HOUR_12 -> {
-        val hour = stateBundle.getInt(ARG_HOUR, 6)
-        val minute = stateBundle.getInt(ARG_MINUTE, 30)
-        val pmAm = stateBundle.getString(ARG_PM_AM, PM.name)
+        val hour = stateBundle.getInt(ARG_HOUR, CmtpTime12.DEFAULT.hour)
+        val minute = stateBundle.getInt(ARG_MINUTE, CmtpTime12.DEFAULT.hour)
+        val pmAm = stateBundle.getString(ARG_PM_AM, CmtpTime12.DEFAULT.pmAm.name)
         time = CmtpTime12(hour, minute, enumValueOf(pmAm))
       }
     }
