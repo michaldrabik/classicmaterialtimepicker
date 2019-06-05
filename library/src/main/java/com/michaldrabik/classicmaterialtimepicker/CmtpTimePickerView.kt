@@ -8,10 +8,12 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime12
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime24
+import com.michaldrabik.classicmaterialtimepicker.model.CmtpTimeType.HOUR_12
+import com.michaldrabik.classicmaterialtimepicker.model.CmtpTimeType.HOUR_24
 import com.michaldrabik.classicmaterialtimepicker.recycler.CmtpValuesAdapter
 import kotlinx.android.synthetic.main.cmtp_timepicker_view.view.*
 
@@ -23,15 +25,9 @@ class CmtpTimePickerView @JvmOverloads constructor(
   private val recyclerMinutesAdapter by lazy { CmtpValuesAdapter() }
   private val recyclerPmAmAdapter by lazy { CmtpValuesAdapter() }
 
-  private val recyclerHoursLayoutManager by lazy {
-    LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-  }
-  private val recyclerMinutesLayoutManager by lazy {
-    LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-  }
-  private val recyclerPmAmLayoutManager by lazy {
-    LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-  }
+  private val recyclerHoursLayoutManager by lazy { LinearLayoutManager(context, VERTICAL, false) }
+  private val recyclerMinutesLayoutManager by lazy { LinearLayoutManager(context, VERTICAL, false) }
+  private val recyclerPmAmLayoutManager by lazy { LinearLayoutManager(context, VERTICAL, false) }
 
   private val recyclerHoursSnapHelper by lazy { LinearSnapHelper() }
   private val recyclerMinutesSnapHelper by lazy { LinearSnapHelper() }
@@ -80,9 +76,9 @@ class CmtpTimePickerView @JvmOverloads constructor(
   }
 
   private fun setupRecyclersData() {
-    val hours = when {
-      time.is12Hour() -> CmtpTimeData.HOURS_12
-      else -> CmtpTimeData.HOURS_24
+    val hours = when (time.type) {
+      HOUR_12 -> CmtpTimeData.HOURS_12
+      HOUR_24 -> CmtpTimeData.HOURS_24
     }
     cmtpRecyclerHours.apply {
       recyclerHoursAdapter.setItems(hours.map { String.format("%02d", it) })
@@ -97,13 +93,13 @@ class CmtpTimePickerView @JvmOverloads constructor(
     }
     cmtpRecyclerPmAm.apply {
       recyclerPmAmAdapter.setItems(CmtpTimeData.PM_AM)
-      visibility = when {
-        time.is12Hour() -> {
+      visibility = when (time.type) {
+        HOUR_12 -> {
           recyclerPmAmLayoutManager.scrollToPosition((time as CmtpTime12).pmAm.ordinal)
           smoothScrollBy(0, 1)
           VISIBLE
         }
-        else -> GONE
+        HOUR_24 -> GONE
       }
     }
   }
@@ -117,7 +113,7 @@ class CmtpTimePickerView @JvmOverloads constructor(
   }
 
   fun getTime24(): CmtpTime24 {
-    check(!time.is12Hour()) { "Can't retrieve time in 24-Hour format. TimePicker view was initialised with 12-Hour format." }
+    check(time.type == HOUR_24) { "Can't retrieve time in 24-Hour format. TimePicker view was initialised with 12-Hour format." }
 
     val hoursView = recyclerHoursSnapHelper.findSnapView(recyclerHoursLayoutManager)
     val minutesView = recyclerMinutesSnapHelper.findSnapView(recyclerMinutesLayoutManager)
@@ -135,7 +131,7 @@ class CmtpTimePickerView @JvmOverloads constructor(
   }
 
   fun getTime12(): CmtpTime12 {
-    check(time.is12Hour()) { "Can't retrieve time in 12-Hour format. TimePicker view was initialised with 24-Hour format." }
+    check(time.type == HOUR_12) { "Can't retrieve time in 12-Hour format. TimePicker view was initialised with 24-Hour format." }
 
     val hoursView = recyclerHoursSnapHelper.findSnapView(recyclerHoursLayoutManager)
     val minutesView = recyclerMinutesSnapHelper.findSnapView(recyclerMinutesLayoutManager)
@@ -155,5 +151,5 @@ class CmtpTimePickerView @JvmOverloads constructor(
     )
   }
 
-  fun is12Hour() = time.is12Hour()
+  fun getType() = time.type
 }
