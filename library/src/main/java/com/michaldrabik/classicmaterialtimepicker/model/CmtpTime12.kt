@@ -10,6 +10,7 @@ data class CmtpTime12(
 ) : CmtpTime {
 
   companion object {
+    @JvmStatic
     val DEFAULT = CmtpTime12(6, 30, PmAm.PM)
   }
 
