@@ -1,7 +1,9 @@
 Classic Material TimePicker
 ===========
 
-Simple, customizable TimePicker created in the "old" Android API 16 style. Reimagined with Material 2.0 style.
+Simple, customizable TimePicker created in the "old" Android API 16 style.
+
+Restyled with Material 2.0 guidelines and powered by RecyclerView.
 
 | **Classic Material TimePicker**|**"Old" Android Api 16 TimePicker**|
 | ------------- |:-------------:|
