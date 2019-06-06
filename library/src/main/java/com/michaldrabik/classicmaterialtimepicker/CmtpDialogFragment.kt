@@ -28,6 +28,7 @@ class CmtpDialogFragment : DialogFragment() {
      * @param negativeButtonText Custom negative button text. "CANCEL" by default.
      */
     @JvmOverloads
+    @JvmStatic
     fun newInstance(
       positiveButtonText: String = "OK",
       negativeButtonText: String = "Cancel"
