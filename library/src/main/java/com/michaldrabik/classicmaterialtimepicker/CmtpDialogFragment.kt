@@ -43,8 +43,8 @@ class CmtpDialogFragment : DialogFragment() {
   private lateinit var time: CmtpTime
   private lateinit var timePicker: CmtpTimePickerView
 
-  private var onTime12PickedListener: (CmtpTime12) -> Unit = { }
-  private var onTime24PickedListener: (CmtpTime24) -> Unit = { }
+  private lateinit var onTime12PickedListener: OnTime12PickedListener
+  private lateinit var onTime24PickedListener: OnTime24PickedListener
 
   override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
     val context = requireContext()
@@ -58,12 +58,7 @@ class CmtpDialogFragment : DialogFragment() {
 
     dialogBuilder.setPositiveButton(
       arguments?.getString(ARG_POSITIVE_BUTTON_TEXT)
-    ) { _, _ ->
-      when (timePicker.getType()) {
-        HOUR_12 -> onTime12PickedListener.invoke(timePicker.getTime12())
-        HOUR_24 -> onTime24PickedListener.invoke(timePicker.getTime24())
-      }
-    }
+    ) { _, _ -> onTimePicked() }
 
     dialogBuilder.setNegativeButton(
       arguments?.getString(ARG_NEGATIVE_BUTTON_TEXT)
@@ -113,6 +108,21 @@ class CmtpDialogFragment : DialogFragment() {
     }
   }
 
+  private fun onTimePicked() {
+    when (timePicker.getType()) {
+      HOUR_12 -> {
+        if (this::onTime12PickedListener.isInitialized) {
+          onTime12PickedListener.onTimePicked(timePicker.getTime12())
+        }
+      }
+      HOUR_24 -> {
+        if (this::onTime24PickedListener.isInitialized) {
+          onTime24PickedListener.onTimePicked(timePicker.getTime24())
+        }
+      }
+    }
+  }
+
   /**
    * Set initial time with 24-Hour or 12-Hour format.
    */
@@ -123,16 +133,16 @@ class CmtpDialogFragment : DialogFragment() {
   /**
    * Set time picked listener for 12-Hour format.
    */
-  fun setOnTime12PickedListener(listener: (CmtpTime12) -> Unit) {
-    check(time.type == HOUR_12) { "Invalid listener type. Time picker has been initialised as 24-Hour type" }
+  fun setOnTime12PickedListener(listener: OnTime12PickedListener) {
+    check(time.getType() == HOUR_12) { "Invalid listener type. Time picker has been initialised as 24-Hour type" }
     this.onTime12PickedListener = listener
   }
 
   /**
    * Set time picked listener for 24-Hour format.
    */
-  fun setOnTime24PickedListener(listener: (CmtpTime24) -> Unit) {
-    check(time.type == HOUR_24) { "Invalid listener type. Time picker has been initialised as 12-Hour type" }
+  fun setOnTime24PickedListener(listener: OnTime24PickedListener) {
+    check(time.getType() == HOUR_24) { "Invalid listener type. Time picker has been initialised as 12-Hour type" }
     this.onTime24PickedListener = listener
   }
 
