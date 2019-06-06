@@ -1,14 +1,14 @@
 package com.michaldrabik.classicmaterialtimepicker
 
 import android.content.Context
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.LinearSnapHelper
-import android.support.v7.widget.RecyclerView.VERTICAL
 import android.util.AttributeSet
 import android.view.ContextThemeWrapper
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime12
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime24

@@ -2,9 +2,9 @@ package com.michaldrabik.classicmaterialtimepicker
 
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.app.AlertDialog
 import android.view.WindowManager.LayoutParams.WRAP_CONTENT
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime12
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime24
