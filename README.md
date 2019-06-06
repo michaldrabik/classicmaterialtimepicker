@@ -36,9 +36,11 @@ dependencies {
 ```
 
 ## Usage
+TODO
 ## Customization
+TODO
 ## Release Notes
-
+TODO
 ## License
 
 **Copyright 2019 Michal Drabik**
