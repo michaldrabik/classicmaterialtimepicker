@@ -16,6 +16,8 @@ https://giant.gfycat.com/LastingImpassionedGelada.webm
 ## Setup
 This library is being distributed via [JitPack](http://jitpack.io/)
 
+[AndroidX](https://developer.android.com/jetpack/androidx) libraries are required.
+
 **Step 1:**  
 Add Jitpack repository in root **build.gradle** at the end of repositories:
 ```groovy
