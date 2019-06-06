@@ -1,7 +1,7 @@
 package com.michaldrabik.classicmaterialtimepicker.recycler
 
+import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
 
 internal class CmtpValuesAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 

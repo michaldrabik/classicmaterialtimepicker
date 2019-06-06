@@ -16,7 +16,7 @@
 		android:orientation="horizontal"
 		>
 
-		<androidx.recyclerview.widget.RecyclerView
+		<android.support.v7.widget.RecyclerView
 			android:id="@+id/cmtpRecyclerHours"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
@@ -35,7 +35,7 @@
 			tools:ignore="HardcodedText"
 			/>
 
-		<androidx.recyclerview.widget.RecyclerView
+		<android.support.v7.widget.RecyclerView
 			android:id="@+id/cmtpRecyclerMinutes"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
@@ -43,7 +43,7 @@
 			android:overScrollMode="never"
 			/>
 
-		<androidx.recyclerview.widget.RecyclerView
+		<android.support.v7.widget.RecyclerView
 			android:id="@+id/cmtpRecyclerPmAm"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
