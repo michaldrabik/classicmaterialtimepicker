@@ -6,7 +6,6 @@ Simple, customizable TimePicker created in the "old" Android API 16 style. Reima
 | **Classic Material TimePicker**|**"Old" Android Api 16 TimePicker**|
 | ------------- |:-------------:|
 |<img src="assets/demo.gif" width="250" alt="demo">|<img src="assets/screenshot_old_picker.png" width="250" alt="screenshot 1">
-|
 
 **High Resolution Demo:**
 
