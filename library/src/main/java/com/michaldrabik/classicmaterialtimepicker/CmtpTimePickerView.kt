@@ -76,7 +76,7 @@ class CmtpTimePickerView @JvmOverloads constructor(
   }
 
   private fun setupRecyclersData() {
-    val hours = when (time.type) {
+    val hours = when (time.getType()) {
       HOUR_12 -> CmtpTimeData.HOURS_12
       HOUR_24 -> CmtpTimeData.HOURS_24
     }
@@ -93,7 +93,7 @@ class CmtpTimePickerView @JvmOverloads constructor(
     }
     cmtpRecyclerPmAm.apply {
       recyclerPmAmAdapter.setItems(CmtpTimeData.PM_AM)
-      visibility = when (time.type) {
+      visibility = when (time.getType()) {
         HOUR_12 -> {
           recyclerPmAmLayoutManager.scrollToPosition((time as CmtpTime12).pmAm.ordinal)
           smoothScrollBy(0, 1)
@@ -117,7 +117,7 @@ class CmtpTimePickerView @JvmOverloads constructor(
    * @throws IllegalStateException will be thrown if CmtpTimePickerView has been initialised with 12-Hour format.
    */
   fun getTime24(): CmtpTime24 {
-    check(time.type == HOUR_24) { "Can't retrieve time in 24-Hour format. TimePicker view was initialised with 12-Hour format." }
+    check(time.getType() == HOUR_24) { "Can't retrieve time in 24-Hour format. TimePicker view was initialised with 12-Hour format." }
 
     val hoursView = recyclerHoursSnapHelper.findSnapView(recyclerHoursLayoutManager)
     val minutesView = recyclerMinutesSnapHelper.findSnapView(recyclerMinutesLayoutManager)
@@ -139,7 +139,7 @@ class CmtpTimePickerView @JvmOverloads constructor(
    * @throws IllegalStateException will be thrown if CmtpTimePickerView has been initialised with 24-Hour format.
    */
   fun getTime12(): CmtpTime12 {
-    check(time.type == HOUR_12) { "Can't retrieve time in 12-Hour format. TimePicker view was initialised with 24-Hour format." }
+    check(time.getType() == HOUR_12) { "Can't retrieve time in 12-Hour format. TimePicker view was initialised with 24-Hour format." }
 
     val hoursView = recyclerHoursSnapHelper.findSnapView(recyclerHoursLayoutManager)
     val minutesView = recyclerMinutesSnapHelper.findSnapView(recyclerMinutesLayoutManager)
@@ -159,5 +159,5 @@ class CmtpTimePickerView @JvmOverloads constructor(
     )
   }
 
-  fun getType() = time.type
+  fun getType() = time.getType()
 }
