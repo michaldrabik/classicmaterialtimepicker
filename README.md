@@ -37,7 +37,50 @@ dependencies {
 ```
 
 ## Usage
-TODO
+See [Sample App](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/app/src/main/java/com/michaldrabik/cmtpsample/MainActivity.kt) for full example.
+
+Create and show time picker's CmtpDialogFragment:
+```kotlin
+val timePicker = CmtpDialogFragment.newInstance()
+timePicker.show(supportFragmentManager, "TimePickerTag")
+```
+Set initial time with `setInitialTime()` method:
+```kotlin
+val timePicker = CmtpDialogFragment.newInstance()
+
+// Set initial time and initialise time picker in 12-hour time format.
+timePicker.setInitialTime(CmtpTime12(5, 15, PM))
+
+// Set initial time and initialise time picker in 24-hour time format.
+timePicker.setInitialTime(CmtpTime24(23, 30))
+
+timePicker.show(supportFragmentManager, "TimePickerTag")
+```
+
+Selected time can be retrieved with one of the listeners:
+```kotlin
+val timePicker = CmtpDialogFragment.newInstance()
+
+// Set 12-hour time format listener.
+// Use this listener if time picker was initialised in 12-hour format.
+timePicker.setOnTime12PickedListener(object : OnTime12PickedListener {
+  override fun onTimePicked(time: CmtpTime12) {
+    // Do something with picked time.
+  }
+})
+
+// Set 24-hour time format listener.
+// Use this listener if time picker was initialised in 24-hour format.
+timePicker.setOnTime24PickedListener(object : OnTime24PickedListener {
+  override fun onTimePicked(time: CmtpTime24) {
+    // Do something with picked time.
+  }
+})
+
+
+timePicker.show(supportFragmentManager, "TimePickerTag")
+```
+
 ## Customization
 TODO
 ## Release Notes
