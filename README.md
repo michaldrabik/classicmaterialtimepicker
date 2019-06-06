@@ -20,9 +20,9 @@ This library is being distributed via [JitPack](http://jitpack.io/)
 Add Jitpack repository in root **build.gradle** at the end of repositories:
 ```groovy
 allprojects {
-	repositories {
-		maven { url 'https://jitpack.io' }
-	}
+  repositories {
+   maven { url 'https://jitpack.io' }
+  }
 }
 ```
 
