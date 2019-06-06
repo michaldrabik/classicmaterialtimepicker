@@ -1,18 +1,17 @@
 Classic Material TimePicker
 ===========
 
-Simple, customizable TimePicker created in the "old" Android API 16 style. Reimagined with Material 2.0 style.
+Simple, customizable TimePicker created in the "old" Android API 16 style.
 
-**DEMO: https://giant.gfycat.com/LastingImpassionedGelada.webm**
+Restyled with Material 2.0 guidelines and powered by RecyclerView.
 
-**"Old" Android Api 16 TimePicker:**
+| **Classic Material TimePicker**|**"Old" Android Api 16 TimePicker**|
+| ------------- |:-------------:|
+|<img src="assets/demo.gif" width="250" alt="demo">|<img src="assets/screenshot_old_picker.png" width="250" alt="screenshot 1">
 
-<img src="assets/screenshot_old_picker.png" width="250" alt="screenshot 1">
+**High Resolution Demo:**
 
-**Classic Material TimePicker:**
-
-<img src="assets/screenshot_new_picker.png" width="250" alt="screenshot 2">
-
+https://giant.gfycat.com/LastingImpassionedGelada.webm
 
 ## Setup
 This library is being distributed via [JitPack](http://jitpack.io/)
@@ -21,9 +20,9 @@ This library is being distributed via [JitPack](http://jitpack.io/)
 Add Jitpack repository in root **build.gradle** at the end of repositories:
 ```groovy
 allprojects {
-	repositories {
-		maven { url 'https://jitpack.io' }
-	}
+  repositories {
+   maven { url 'https://jitpack.io' }
+  }
 }
 ```
 
