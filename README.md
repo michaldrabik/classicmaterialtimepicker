@@ -77,7 +77,6 @@ timePicker.setOnTime24PickedListener(object : OnTime24PickedListener {
   }
 })
 
-
 timePicker.show(supportFragmentManager, "TimePickerTag")
 ```
 
