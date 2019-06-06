@@ -3,15 +3,14 @@ Classic Material TimePicker
 
 Simple, customizable TimePicker created in the "old" Android API 16 style. Reimagined with Material 2.0 style.
 
-**DEMO: https://giant.gfycat.com/LastingImpassionedGelada.webm**
+| **Classic Material TimePicker**|**"Old" Android Api 16 TimePicker**|
+| ------------- |:-------------:|
+|<img src="assets/demo.gif" width="250" alt="demo">|<img src="assets/screenshot_old_picker.png" width="250" alt="screenshot 1">
+|
 
-**Classic Material TimePicker:**
+**High Resolution Demo:**
 
-<img src="assets/demo.gif" width="250" alt="demo">
-
-**"Old" Android Api 16 TimePicker:**
-
-<img src="assets/screenshot_old_picker.png" width="250" alt="screenshot 1">
+https://giant.gfycat.com/LastingImpassionedGelada.webm
 
 ## Setup
 This library is being distributed via [JitPack](http://jitpack.io/)
