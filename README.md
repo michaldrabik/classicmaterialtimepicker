@@ -49,10 +49,10 @@ Set initial time with `setInitialTime()` method:
 val timePicker = CmtpDialogFragment.newInstance()
 
 // Set initial time and initialise time picker in 12-hour time format.
-timePicker.setInitialTime(CmtpTime12(5, 15, PM))
+timePicker.setInitialTime12(5, 15, PM)
 
 // Set initial time and initialise time picker in 24-hour time format.
-timePicker.setInitialTime(CmtpTime24(23, 30))
+timePicker.setInitialTime24(23, 30)
 
 timePicker.show(supportFragmentManager, "TimePickerTag")
 ```
