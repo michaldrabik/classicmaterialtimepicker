@@ -39,7 +39,7 @@ dependencies {
 ## Usage
 See [Sample App](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/app/src/main/java/com/michaldrabik/cmtpsample/MainActivity.kt) for full example.
 
-Create and show time picker's CmtpDialogFragment:
+Create and show time picker's [CmtpDialogFragment](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpDialogFragment.kt):
 ```kotlin
 val timePicker = CmtpDialogFragment.newInstance()
 timePicker.show(supportFragmentManager, "TimePickerTag")
@@ -80,10 +80,16 @@ timePicker.setOnTime24PickedListener(object : OnTime24PickedListener {
 timePicker.show(supportFragmentManager, "TimePickerTag")
 ```
 
+[CmtpDialogFragment](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpDialogFragment.kt) is being used as a host for [CmtpTimePickerView](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpTimePickerView.kt) view.
+
+You can use this view by itself or host it in a different Android component (like [Bottom Sheet](https://developer.android.com/reference/android/support/design/widget/BottomSheetDialogFragment))
+
 ## Customization
 TODO
+
 ## Release Notes
-TODO
+1.0.0 - Initial Release
+
 ## License
 
 **Copyright 2019 Michal Drabik**
