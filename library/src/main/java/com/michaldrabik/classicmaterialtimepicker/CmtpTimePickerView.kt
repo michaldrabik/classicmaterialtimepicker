@@ -159,5 +159,8 @@ class CmtpTimePickerView @JvmOverloads constructor(
     )
   }
 
+  /**
+   * Get time picker type.
+   */
   fun getType() = time.getType()
 }

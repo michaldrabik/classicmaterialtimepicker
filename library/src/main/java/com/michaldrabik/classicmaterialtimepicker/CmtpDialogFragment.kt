@@ -124,10 +124,24 @@ class CmtpDialogFragment : DialogFragment() {
   }
 
   /**
-   * Set initial time with 24-Hour or 12-Hour format.
+   * Set initial time and initialize picker with 12-Hour format.
+   * @param hour from 1 to 12.
+   * @param minute from 0 to 59.
+   * @param pmAm PM or AM.
+   * @throws IllegalStateException when given hour or minute is out of valid range.
    */
-  fun setInitialTime(initialTime: CmtpTime) {
-    time = initialTime
+  fun setInitialTime12(hour: Int, minute: Int, pmAm: CmtpTime12.PmAm) {
+    time = CmtpTime12(hour, minute, pmAm)
+  }
+
+  /**
+   * Set initial time and initialize picker with 24-Hour format.
+   * @param hour from 0 to 23.
+   * @param minute from 0 to 59.
+   * @throws IllegalStateException when given hour or minute is out of valid range.
+   */
+  fun setInitialTime24(hour: Int, minute: Int) {
+    time = CmtpTime24(hour, minute)
   }
 
   /**
