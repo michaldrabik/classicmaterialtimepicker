@@ -44,7 +44,7 @@ Create and show time picker's [CmtpDialogFragment](https://github.com/michaldrab
 val timePicker = CmtpDialogFragment.newInstance()
 timePicker.show(supportFragmentManager, "TimePickerTag")
 ```
-Set initial time with `setInitialTime()` method:
+Set initial time with `setInitialTime12()` or `setInitialTime24()` method:
 ```kotlin
 val timePicker = CmtpDialogFragment.newInstance()
 
