@@ -81,7 +81,57 @@ timePicker.show(supportFragmentManager, "TimePickerTag")
 You can use this view by itself or host it in a different Android component (like [Bottom Sheet](https://developer.android.com/reference/android/support/design/widget/BottomSheetDialogFragment))
 
 ## Customization
-TODO
+Each element of the time picker can be customized:
+
+**Dialog background**
+
+Override following style in your app with your own background drawable:
+```xml
+<style name="CmtpDialogFrameStyle" parent="CmtpDialogTheme">
+  <item name="android:windowBackground">@drawable/your_background_drawable</item>
+</style>
+```
+
+**Dialog positive/negative button text**
+
+Provide custom texts while creating DialogFragment's instance:
+```kotlin
+val timePicker = CmtpDialogFragment.newInstance("Pick Time", "Hide")
+timePicker.show(supportFragmentManager, "TimePickerTag")
+```
+
+**Dialog positive button style**
+
+Override following style in your app with your own text style:
+```xml
+<style name="CmtpDialogPositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+  <item name="android:textColor">#FF0000</item>
+  <!-- other properties -->
+</style>
+```
+
+**Dialog negative button style**
+
+Override following style in your app with your own text style:
+```xml
+<style name="CmtpDialogNegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+  <item name="android:textColor">#FF0000</item>
+  <!-- other properties -->
+</style>
+```
+
+**Custom text frame drawable, text color and size**
+
+Override following style in your app with your own text style:
+```xml
+<style name="CmtpViewTheme">
+  <item name="cmtpTextFrameDrawable">@drawable/custom_text_frame</item>
+  <item name="cmtpTextColor">#000000</item>
+  <item name="cmtpTextSize">20sp</item>
+</style>
+```
+
+See [Sample App styles](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/app/src/main/res/values/styles.xml) for an example of full customization.
 
 ## Release Notes
 1.0.0 - Initial Release
