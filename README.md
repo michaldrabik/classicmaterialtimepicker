@@ -32,7 +32,7 @@ allprojects {
 Add dependency in app project:
 ```groovy
 dependencies {
-  implementation 'com.github.michaldrabik:classicmaterialtimepicker:0.0.1'
+  implementation 'com.github.michaldrabik:classicmaterialtimepicker:1.0.0'
 }
 ```
 
@@ -63,18 +63,14 @@ val timePicker = CmtpDialogFragment.newInstance()
 
 // Set 12-hour time format listener.
 // Use this listener if time picker was initialised in 12-hour format.
-timePicker.setOnTime12PickedListener(object : OnTime12PickedListener {
-  override fun onTimePicked(time: CmtpTime12) {
-    // Do something with picked time.
-  }
+timePicker.setOnTime12PickedListener { time12 ->
+  // Do something with picked time.
 })
 
 // Set 24-hour time format listener.
 // Use this listener if time picker was initialised in 24-hour format.
-timePicker.setOnTime24PickedListener(object : OnTime24PickedListener {
-  override fun onTimePicked(time: CmtpTime24) {
-    // Do something with picked time.
-  }
+timePicker.setOnTime24PickedListener { time24 ->
+  // Do something with picked time.
 })
 
 timePicker.show(supportFragmentManager, "TimePickerTag")
