@@ -12,7 +12,6 @@ android {
     versionName "1.0"
 
     testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
   }
 
   buildTypes {
@@ -27,7 +26,7 @@ dependencies {
   implementation fileTree(dir: 'libs', include: ['*.jar'])
 
   implementation 'androidx.appcompat:appcompat:1.0.2'
-  implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha05'
+  implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha06'
 
   testImplementation 'junit:junit:4.12'
 
