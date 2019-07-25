@@ -12,7 +12,7 @@ import com.michaldrabik.classicmaterialtimepicker.model.CmtpTimeType
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTimeType.HOUR_12
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTimeType.HOUR_24
 
-class CmtpDialogFragment : DialogFragment() {
+class CmtpTimeDialogFragment : DialogFragment() {
 
   companion object {
     private const val ARG_POSITIVE_BUTTON_TEXT = "ARG_POSITIVE_BUTTON_TEXT"
@@ -23,7 +23,7 @@ class CmtpDialogFragment : DialogFragment() {
     private const val ARG_TYPE = "ARG_TYPE"
 
     /**
-     * Create new instance of CmtpDialogFragment with CmtpTimePickerView embedded.
+     * Create new instance of CmtpTimeDialogFragment with CmtpTimePickerView embedded.
      * @param positiveButtonText Custom positive button text. "OK" by default.
      * @param negativeButtonText Custom negative button text. "CANCEL" by default.
      */
@@ -32,7 +32,7 @@ class CmtpDialogFragment : DialogFragment() {
     fun newInstance(
       positiveButtonText: String = "OK",
       negativeButtonText: String = "Cancel"
-    ) = CmtpDialogFragment().apply {
+    ) = CmtpTimeDialogFragment().apply {
       arguments = Bundle().apply {
         putString(ARG_POSITIVE_BUTTON_TEXT, positiveButtonText)
         putString(ARG_NEGATIVE_BUTTON_TEXT, negativeButtonText)

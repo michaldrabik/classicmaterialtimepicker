@@ -9,7 +9,7 @@ data class CmtpDate(
 
   companion object {
     @JvmStatic
-    val calendar = Calendar.getInstance()
+    val calendar: Calendar = Calendar.getInstance()
     val DEFAULT = CmtpDate(calendar.get(Calendar.DAY_OF_MONTH),
       calendar.get(Calendar.MONTH),
       calendar.get(Calendar.YEAR))

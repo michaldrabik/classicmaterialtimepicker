@@ -10,20 +10,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpDate
-import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime
-import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime12
-import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime24
-import com.michaldrabik.classicmaterialtimepicker.model.CmtpTimeType.HOUR_12
-import com.michaldrabik.classicmaterialtimepicker.model.CmtpTimeType.HOUR_24
 import com.michaldrabik.classicmaterialtimepicker.recycler.CmtpValuesAdapter
+import com.michaldrabik.classicmaterialtimepicker.utilities.OnSnapPositionChangeListener
+import com.michaldrabik.classicmaterialtimepicker.utilities.SnapOnScrollListener
+import com.michaldrabik.classicmaterialtimepicker.utilities.attachSnapHelperWithListener
+import com.michaldrabik.classicmaterialtimepicker.utilities.getNumberOfDays
 import kotlinx.android.synthetic.main.cmtp_datepicker_view.view.*
-import java.util.*
 
 class CmtpDatePickerView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
-) : FrameLayout(context, attrs, defStyleAttr) {
-
-    private val calendar = Calendar.getInstance()
+) : FrameLayout(context, attrs, defStyleAttr), OnSnapPositionChangeListener {
 
     private val recyclerYearsAdapter by lazy { CmtpValuesAdapter() }
     private val recyclerMonthsAdapter by lazy { CmtpValuesAdapter() }
@@ -37,21 +33,7 @@ class CmtpDatePickerView @JvmOverloads constructor(
     private val recyclerMonthsSnapHelper by lazy { LinearSnapHelper() }
     private val recyclerDaysSnapHelper by lazy { LinearSnapHelper() }
 
-
-    // TODO Erase all those time-related items
-    private val recyclerHoursAdapter by lazy { CmtpValuesAdapter() }
-    private val recyclerMinutesAdapter by lazy { CmtpValuesAdapter() }
-    private val recyclerPmAmAdapter by lazy { CmtpValuesAdapter() }
-
-    private val recyclerHoursLayoutManager by lazy { LinearLayoutManager(context, VERTICAL, false) }
-    private val recyclerMinutesLayoutManager by lazy { LinearLayoutManager(context, VERTICAL, false) }
-    private val recyclerPmAmLayoutManager by lazy { LinearLayoutManager(context, VERTICAL, false) }
-
-    private val recyclerHoursSnapHelper by lazy { LinearSnapHelper() }
-    private val recyclerMinutesSnapHelper by lazy { LinearSnapHelper() }
-    private val recyclerPmAmSnapHelper by lazy { LinearSnapHelper() }
-
-    private var time: CmtpTime = CmtpTime24.DEFAULT
+    private var date: CmtpDate = CmtpDate.DEFAULT
 
     init {
         inflate(
@@ -90,27 +72,66 @@ class CmtpDatePickerView @JvmOverloads constructor(
             layoutManager = recyclerYearsLayoutManager
             recyclerYearsSnapHelper.attachToRecyclerView(this)
         }
+
         setupRecyclersData()
     }
 
     private fun setupRecyclersData() {
-        cmtpRecyclerDays.apply {
-            val days = CmtpDateData.DAYS
-            recyclerDaysAdapter.setItems(days.map { String.format("%02d", it) })
-            recyclerDaysLayoutManager.scrollToPosition(days.indexOf(calendar.get(Calendar.DAY_OF_MONTH)))
-            smoothScrollBy(0, 1)
-        }
-        cmtpRecyclerMonths.apply {
-            val months = CmtpDateData.MONTHS
-            recyclerMonthsAdapter.setItems(months.map { String.format("%02d", it) })
-            recyclerMonthsLayoutManager.scrollToPosition(months.indexOf(calendar.get(Calendar.MONTH)))
-            smoothScrollBy(0, 1)
-        }
         cmtpRecyclerYears.apply {
             val years = CmtpDateData.YEARS
             recyclerYearsAdapter.setItems(years.map { String.format("%04d", it) })
-            recyclerMonthsLayoutManager.scrollToPosition(years.indexOf(calendar.get(Calendar.YEAR)))
+            recyclerYearsLayoutManager.scrollToPosition(years.indexOf(date.year))
+            smoothScrollBy(0, 1)
+
+            attachSnapHelperWithListener(
+                recyclerYearsSnapHelper,
+                SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL_STATE_IDLE,
+                this@CmtpDatePickerView
+            )
         }
+
+        cmtpRecyclerMonths.apply {
+            val months = CmtpDateData.MONTHS
+            recyclerMonthsAdapter.setItems(months.map { String.format("%02d", it) })
+            recyclerMonthsLayoutManager.scrollToPosition(months.indexOf(date.month))
+            smoothScrollBy(0, 1)
+
+            attachSnapHelperWithListener(
+                recyclerMonthsSnapHelper,
+                SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL_STATE_IDLE,
+                this@CmtpDatePickerView
+            )
+        }
+
+        // Days RV is setup after month and year because it's necessary to check how many days that specific month has.
+        setUpDaysRecyclerBasedOnDate(date)
+    }
+
+    private fun setUpDaysRecyclerBasedOnDate(cmtpDate: CmtpDate) {
+        cmtpRecyclerDays.apply {
+            val maxNumberOfDays = getNumberOfDays(cmtpDate)
+            if (cmtpDate.day > maxNumberOfDays) {
+                date = CmtpDate(maxNumberOfDays, cmtpDate.month, cmtpDate.year)
+            }
+            val days = (1..maxNumberOfDays)
+            recyclerDaysAdapter.setItems(days.map { String.format("%02d", it) })
+            recyclerDaysAdapter.notifyDataSetChanged()
+            recyclerDaysLayoutManager.scrollToPosition(days.indexOf(date.day))
+            smoothScrollBy(0, 1)
+        }
+    }
+
+    override fun onSnapPositionChange(position: Int) {
+        val currentSelectedDate = getDate()
+        setUpDaysRecyclerBasedOnDate(currentSelectedDate)
+    }
+
+    /**
+     * Set time with 24-Hour or 12-Hour format.
+     */
+    fun setDate(initialDate: CmtpDate) {
+        date = initialDate
+        setupRecyclersData()
     }
 
     fun getDate(): CmtpDate {
@@ -122,7 +143,12 @@ class CmtpDatePickerView @JvmOverloads constructor(
             throw java.lang.IllegalStateException("DatePicker view has not been initialized yet.")
         }
 
-        val dayIndex = recyclerDaysLayoutManager.getPosition(dayView)
+        // Force update of index when new month has fewer days than previous month
+        var dayIndex = recyclerDaysLayoutManager.getPosition(dayView)
+        if (dayIndex >= recyclerDaysAdapter.getItems().size) {
+            dayIndex = recyclerDaysAdapter.getItems().size - 1
+        }
+
         val monthIndex = recyclerMonthsLayoutManager.getPosition(monthView)
         val yearIndex = recyclerYearsLayoutManager.getPosition(yearView)
 

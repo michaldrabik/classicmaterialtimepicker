@@ -3,8 +3,10 @@ package com.michaldrabik.cmtpsample
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.michaldrabik.classicmaterialtimepicker.CmtpDialogFragment
+import com.michaldrabik.classicmaterialtimepicker.CmtpDateDialogFragment
+import com.michaldrabik.classicmaterialtimepicker.CmtpTimeDialogFragment
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime12.PmAm.PM
+import com.michaldrabik.classicmaterialtimepicker.utilities.setOnDatePickedListener
 import com.michaldrabik.classicmaterialtimepicker.utilities.setOnTime12PickedListener
 import com.michaldrabik.classicmaterialtimepicker.utilities.setOnTime24PickedListener
 import kotlinx.android.synthetic.main.activity_main.*
@@ -17,10 +19,11 @@ class MainActivity : AppCompatActivity() {
 
     dialog12Button.setOnClickListener { showTime12PickerDialog() }
     dialog24Button.setOnClickListener { showTime24PickerDialog() }
+    dialogDate.setOnClickListener { showDateTimePickerDialog() }
   }
 
   private fun showTime12PickerDialog() {
-    val dialog = CmtpDialogFragment.newInstance()
+    val dialog = CmtpTimeDialogFragment.newInstance()
     dialog.setInitialTime12(5, 15, PM)
     dialog.setOnTime12PickedListener {
       Toast.makeText(this@MainActivity, it.toString(), Toast.LENGTH_SHORT).show()
@@ -29,10 +32,19 @@ class MainActivity : AppCompatActivity() {
   }
 
   private fun showTime24PickerDialog() {
-    val dialog = CmtpDialogFragment.newInstance()
+    val dialog = CmtpTimeDialogFragment.newInstance()
     dialog.setInitialTime24(23, 30)
     dialog.setOnTime24PickedListener {
       Toast.makeText(this@MainActivity, it.toString(), Toast.LENGTH_SHORT).show()
+    }
+    dialog.show(supportFragmentManager, "TimePicker")
+  }
+
+  private fun showDateTimePickerDialog() {
+    val dialog = CmtpDateDialogFragment.newInstance()
+    dialog.setInitialDate(1, 6,1990)
+    dialog.setOnDatePickedListener {
+        Toast.makeText(this@MainActivity, it.toString(), Toast.LENGTH_SHORT).show()
     }
     dialog.show(supportFragmentManager, "TimePicker")
   }
