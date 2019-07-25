@@ -8,6 +8,7 @@ import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpDate
 import com.michaldrabik.classicmaterialtimepicker.recycler.CmtpValuesAdapter
@@ -105,25 +106,41 @@ class CmtpDatePickerView @JvmOverloads constructor(
 
         // Days RV is setup after month and year because it's necessary to check how many days that specific month has.
         setUpDaysRecyclerBasedOnDate(date)
+
+        cmtpRecyclerDays.attachSnapHelperWithListener(
+            recyclerDaysSnapHelper,
+            SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL_STATE_IDLE,
+            this@CmtpDatePickerView
+            )
     }
 
     private fun setUpDaysRecyclerBasedOnDate(cmtpDate: CmtpDate) {
         cmtpRecyclerDays.apply {
+            var dayChanged = false
             val maxNumberOfDays = getNumberOfDays(cmtpDate)
+
             if (cmtpDate.day > maxNumberOfDays) {
                 date = CmtpDate(maxNumberOfDays, cmtpDate.month, cmtpDate.year)
+                dayChanged = true
             }
+
             val days = (1..maxNumberOfDays)
             recyclerDaysAdapter.setItems(days.map { String.format("%02d", it) })
             recyclerDaysAdapter.notifyDataSetChanged()
-            recyclerDaysLayoutManager.scrollToPosition(days.indexOf(date.day))
-            smoothScrollBy(0, 1)
+
+            if (dayChanged) {
+                recyclerDaysLayoutManager.scrollToPosition(days.indexOf(date.day))
+                smoothScrollBy(0, 1)
+            }
         }
     }
 
-    override fun onSnapPositionChange(position: Int) {
-        val currentSelectedDate = getDate()
-        setUpDaysRecyclerBasedOnDate(currentSelectedDate)
+    override fun onSnapPositionChange(position: Int, rv: RecyclerView) {
+        date = getDate()
+
+        if (rv != cmtpRecyclerDays) {
+            setUpDaysRecyclerBasedOnDate(date)
+        }
     }
 
     /**
