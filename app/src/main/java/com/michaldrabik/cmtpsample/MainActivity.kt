@@ -13,39 +13,41 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-  override fun onCreate(savedInstanceState: Bundle?) {
-    super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-    dialog12Button.setOnClickListener { showTime12PickerDialog() }
-    dialog24Button.setOnClickListener { showTime24PickerDialog() }
-    dialogDate.setOnClickListener { showDateTimePickerDialog() }
-  }
-
-  private fun showTime12PickerDialog() {
-    val dialog = CmtpTimeDialogFragment.newInstance()
-    dialog.setInitialTime12(5, 15, PM)
-    dialog.setOnTime12PickedListener {
-      Toast.makeText(this@MainActivity, it.toString(), Toast.LENGTH_SHORT).show()
+        dialog12Button.setOnClickListener { showTime12PickerDialog() }
+        dialog24Button.setOnClickListener { showTime24PickerDialog() }
+        dialogDate.setOnClickListener { showDateTimePickerDialog() }
     }
-    dialog.show(supportFragmentManager, "TimePicker")
-  }
 
-  private fun showTime24PickerDialog() {
-    val dialog = CmtpTimeDialogFragment.newInstance()
-    dialog.setInitialTime24(23, 30)
-    dialog.setOnTime24PickedListener {
-      Toast.makeText(this@MainActivity, it.toString(), Toast.LENGTH_SHORT).show()
+    private fun showTime12PickerDialog() {
+        val dialog = CmtpTimeDialogFragment.newInstance()
+        dialog.setInitialTime12(5, 15, PM)
+        dialog.setOnTime12PickedListener {
+            Toast.makeText(this@MainActivity, it.toString(), Toast.LENGTH_SHORT).show()
+        }
+        dialog.show(supportFragmentManager, "TimePicker")
     }
-    dialog.show(supportFragmentManager, "TimePicker")
-  }
 
-  private fun showDateTimePickerDialog() {
-    val dialog = CmtpDateDialogFragment.newInstance()
-    dialog.setInitialDate(1, 6,1990)
-    dialog.setOnDatePickedListener {
-        Toast.makeText(this@MainActivity, it.toString(), Toast.LENGTH_SHORT).show()
+    private fun showTime24PickerDialog() {
+        val dialog = CmtpTimeDialogFragment.newInstance()
+        dialog.setInitialTime24(23, 30)
+        dialog.setOnTime24PickedListener {
+            Toast.makeText(this@MainActivity, it.toString(), Toast.LENGTH_SHORT).show()
+        }
+        dialog.show(supportFragmentManager, "TimePicker")
     }
-    dialog.show(supportFragmentManager, "TimePicker")
-  }
+
+    private fun showDateTimePickerDialog() {
+        val dialog = CmtpDateDialogFragment.newInstance()
+        dialog.setInitialDate(1, 6, 1990)
+        dialog.setCustomYearRange(1950, 2030)
+        dialog.setCustomDateSeparatorCharacter(".")
+        dialog.setOnDatePickedListener {
+            Toast.makeText(this@MainActivity, it.toString(), Toast.LENGTH_SHORT).show()
+        }
+        dialog.show(supportFragmentManager, "TimePicker")
+    }
 }

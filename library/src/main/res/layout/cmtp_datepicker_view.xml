@@ -25,6 +25,7 @@
         />
 
         <TextView
+                android:id="@+id/day_month_separator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="1dp"
@@ -44,6 +45,7 @@
         />
 
         <TextView
+                android:id="@+id/month_year_separator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="1dp"

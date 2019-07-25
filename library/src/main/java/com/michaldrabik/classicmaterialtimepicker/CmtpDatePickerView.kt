@@ -105,7 +105,8 @@ class CmtpDatePickerView @JvmOverloads constructor(
         }
 
         // Days RV is setup after month and year because it's necessary to check how many days that specific month has.
-        setUpDaysRecyclerBasedOnDate(date)
+        // Also, force scroll is true because it's necessary to adjust the initial position.
+        setUpDaysRecyclerBasedOnDate(date, true)
 
         cmtpRecyclerDays.attachSnapHelperWithListener(
             recyclerDaysSnapHelper,
@@ -114,21 +115,22 @@ class CmtpDatePickerView @JvmOverloads constructor(
             )
     }
 
-    private fun setUpDaysRecyclerBasedOnDate(cmtpDate: CmtpDate) {
+    private fun setUpDaysRecyclerBasedOnDate(cmtpDate: CmtpDate, forceScroll: Boolean) {
         cmtpRecyclerDays.apply {
-            var dayChanged = false
+            var forceScroll: Boolean = forceScroll
+
             val maxNumberOfDays = getNumberOfDays(cmtpDate)
 
             if (cmtpDate.day > maxNumberOfDays) {
                 date = CmtpDate(maxNumberOfDays, cmtpDate.month, cmtpDate.year)
-                dayChanged = true
+                forceScroll = true
             }
 
             val days = (1..maxNumberOfDays)
             recyclerDaysAdapter.setItems(days.map { String.format("%02d", it) })
             recyclerDaysAdapter.notifyDataSetChanged()
 
-            if (dayChanged) {
+            if (forceScroll) {
                 recyclerDaysLayoutManager.scrollToPosition(days.indexOf(date.day))
                 smoothScrollBy(0, 1)
             }
@@ -139,7 +141,7 @@ class CmtpDatePickerView @JvmOverloads constructor(
         date = getDate()
 
         if (rv != cmtpRecyclerDays) {
-            setUpDaysRecyclerBasedOnDate(date)
+            setUpDaysRecyclerBasedOnDate(date, false)
         }
     }
 
@@ -149,6 +151,25 @@ class CmtpDatePickerView @JvmOverloads constructor(
     fun setDate(initialDate: CmtpDate) {
         date = initialDate
         setupRecyclersData()
+    }
+
+    fun setCustomYearRange(customYearRange: IntRange) {
+        cmtpRecyclerYears.apply {
+            recyclerYearsAdapter.setItems(customYearRange.map { String.format("%04d", it) })
+            recyclerYearsLayoutManager.scrollToPosition(customYearRange.indexOf(date.year))
+            smoothScrollBy(0, 1)
+
+            attachSnapHelperWithListener(
+                recyclerYearsSnapHelper,
+                SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL_STATE_IDLE,
+                this@CmtpDatePickerView
+            )
+        }
+    }
+
+    fun setCustomDateSeparatorCharacter(separator: String) {
+        day_month_separator.text = separator
+        month_year_separator.text = separator
     }
 
     fun getDate(): CmtpDate {
