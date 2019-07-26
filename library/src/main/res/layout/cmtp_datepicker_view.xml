@@ -1,78 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:parentTag="android.widget.FrameLayout"
-        tools:theme="@style/CmtpViewTheme"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="android.widget.FrameLayout"
+    tools:theme="@style/CmtpViewTheme"
 >
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/cmtp_timepicker_height"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:orientation="horizontal"
-    >
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="@dimen/cmtp_timepicker_height"
+      android:layout_gravity="center"
+      android:gravity="center"
+      android:orientation="horizontal"
+  >
 
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cmtpRecyclerDays"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:overScrollMode="never"
-        />
-
-        <TextView
-                android:id="@+id/day_month_separator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
-                android:text="/"
-                android:textColor="?cmtpTextColor"
-                android:textSize="?cmtpTextSize"
-                android:theme="@style/CmtpViewTheme"
-                tools:ignore="HardcodedText"
-        />
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cmtpRecyclerMonths"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:overScrollMode="never"
-        />
-
-        <TextView
-                android:id="@+id/month_year_separator"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="1dp"
-                android:text="/"
-                android:textColor="?cmtpTextColor"
-                android:textSize="?cmtpTextSize"
-                android:theme="@style/CmtpViewTheme"
-                tools:ignore="HardcodedText"
-        />
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/cmtpRecyclerYears"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:clipToPadding="false"
-                android:overScrollMode="never"
-        />
-
-    </LinearLayout>
-
-    <View
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:layout_gravity="center"
-            android:layout_marginLeft="24dp"
-            android:layout_marginRight="24dp"
-            android:background="?cmtpTextFrameDrawable"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cmtpRecyclerDays"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
     />
+
+    <TextView
+        android:id="@+id/day_month_separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:text="/"
+        android:textColor="?cmtpTextColor"
+        android:textSize="?cmtpTextSize"
+        android:theme="@style/CmtpViewTheme"
+        tools:ignore="HardcodedText"
+    />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cmtpRecyclerMonths"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+    />
+
+    <TextView
+        android:id="@+id/month_year_separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:text="/"
+        android:textColor="?cmtpTextColor"
+        android:textSize="?cmtpTextSize"
+        android:theme="@style/CmtpViewTheme"
+        tools:ignore="HardcodedText"
+    />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/cmtpRecyclerYears"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+    />
+
+  </LinearLayout>
+
+  <View
+      android:layout_width="match_parent"
+      android:layout_height="38dp"
+      android:layout_gravity="center"
+      android:layout_marginLeft="24dp"
+      android:layout_marginRight="24dp"
+      android:background="?cmtpTextFrameDrawable"
+  />
 
 </merge>

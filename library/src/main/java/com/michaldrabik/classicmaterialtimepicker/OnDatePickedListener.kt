@@ -5,5 +5,5 @@ import com.michaldrabik.classicmaterialtimepicker.model.CmtpDate
 
 interface OnDatePickedListener {
 
-    fun onDatePicked(@NonNull date: CmtpDate)
+  fun onDatePicked(@NonNull date: CmtpDate)
 }
