@@ -48,7 +48,7 @@ class CmtpDateDialogFragment : DialogFragment() {
     savedInstanceState?.let { restoreState(it) }
     if (this::date.isInitialized) datePicker.setDate(date)
     if (this::customYearRange.isInitialized) datePicker.setCustomYearRange(customYearRange)
-    if (this::customDateSeparator.isInitialized) datePicker.setCustomDateSeparatorCharacter(customDateSeparator)
+    if (this::customDateSeparator.isInitialized) datePicker.setCustomSeparator(customDateSeparator)
 
     val dialogBuilder = AlertDialog.Builder(context, R.style.CmtpDialogFrameStyle)
     dialogBuilder.setView(datePicker)
@@ -97,18 +97,32 @@ class CmtpDateDialogFragment : DialogFragment() {
    * Set initial date and initialize picker
    * @param day from 1 to 31 (depending on month).
    * @param month from 1 to 12.
-   * @param year from currentYear-100 to currentYear+100
+   * @param year from currentYear-100 to currentYear+100 (default)
    * @throws IllegalStateException when given day, month or year is out of valid range.
    */
   fun setInitialDate(day: Int, month: Int, year: Int) {
     date = CmtpDate(day, month, year)
   }
 
+  /**
+   * Set custom range for years
+   * @param startingYear year defining the beginning of the custom range
+   * @param endingYear year defining the end of the custom range
+   * @throws IllegalStateException when given an endingYear smaller than startingYear
+   */
   fun setCustomYearRange(startingYear: Int, endingYear: Int) {
-    customYearRange = (startingYear..endingYear)
+    if (startingYear > endingYear) {
+      throw IllegalStateException("The starting year must be smaller than endingYear")
+    } else {
+      customYearRange = (startingYear..endingYear)
+    }
   }
 
-  fun setCustomDateSeparatorCharacter(separator: String) {
+  /**
+   * Set custom separator character for dates
+   * @param separator separator to be used on datepicker
+   */
+  fun setCustomSeparator(separator: String) {
     customDateSeparator = separator
   }
 

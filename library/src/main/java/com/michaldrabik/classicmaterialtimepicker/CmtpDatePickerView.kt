@@ -18,7 +18,7 @@ import com.michaldrabik.classicmaterialtimepicker.utilities.attachSnapHelperWith
 import com.michaldrabik.classicmaterialtimepicker.utilities.getNumberOfDays
 import kotlinx.android.synthetic.main.cmtp_datepicker_view.view.*
 
-class CmtpDatePickerView @JvmOverloads constructor(
+open class CmtpDatePickerView @JvmOverloads constructor(
   context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr), OnSnapPositionChangeListener {
 
@@ -146,14 +146,14 @@ class CmtpDatePickerView @JvmOverloads constructor(
   }
 
   /**
-   * Set time with 24-Hour or 12-Hour format.
+   * Set initial date on Pickerview
    */
   fun setDate(initialDate: CmtpDate) {
     date = initialDate
     setupRecyclersData()
   }
 
-  fun setCustomYearRange(customYearRange: IntRange) {
+  internal fun setCustomYearRange(customYearRange: IntRange) {
     cmtpRecyclerYears.apply {
       recyclerYearsAdapter.setItems(customYearRange.map { String.format("%04d", it) })
       recyclerYearsLayoutManager.scrollToPosition(customYearRange.indexOf(date.year))
@@ -167,11 +167,15 @@ class CmtpDatePickerView @JvmOverloads constructor(
     }
   }
 
-  fun setCustomDateSeparatorCharacter(separator: String) {
+  internal fun setCustomSeparator(separator: String) {
     day_month_separator.text = separator
     month_year_separator.text = separator
   }
 
+  /**
+   * Get selected date containing day, month and year.
+   * @throws IllegalStateException will be thrown if CmtpTimePickerView has been initialised with 12-Hour format.
+   */
   fun getDate(): CmtpDate {
     val dayView = recyclerDaysSnapHelper.findSnapView(recyclerDaysLayoutManager)
     val monthView = recyclerMonthsSnapHelper.findSnapView(recyclerMonthsLayoutManager)

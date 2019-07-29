@@ -43,8 +43,8 @@ class MainActivity : AppCompatActivity() {
     private fun showDateTimePickerDialog() {
         val dialog = CmtpDateDialogFragment.newInstance()
         dialog.setInitialDate(1, 6, 1990)
-        dialog.setCustomYearRange(1950, 2030)
-        dialog.setCustomDateSeparatorCharacter(".")
+      dialog.setCustomYearRange(1990, 2020)
+      dialog.setCustomSeparator(".")
         dialog.setOnDatePickedListener {
             Toast.makeText(this@MainActivity, it.toString(), Toast.LENGTH_SHORT).show()
         }
