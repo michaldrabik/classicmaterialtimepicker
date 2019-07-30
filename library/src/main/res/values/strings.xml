@@ -1,4 +1,4 @@
 <resources>
-  <string name="cmtp_ok">OK</string>
-  <string name="cmtp_cancel">Cancel</string>
+	<string name="cmtp_ok">OK</string>
+	<string name="cmtp_cancel">Cancel</string>
 </resources>
