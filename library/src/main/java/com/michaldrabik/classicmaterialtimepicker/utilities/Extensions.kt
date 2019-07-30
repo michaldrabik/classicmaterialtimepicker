@@ -27,10 +27,10 @@ fun CmtpDateDialogFragment.setOnDatePickedListener(listener: (CmtpDate) -> Unit)
 }
 
 // Calculates the number of days in a certain month and year.
-fun getNumberOfDays(cmtpDate: CmtpDate): Int {
+fun getNumberOfDays(month: Int, year: Int): Int {
   val calendar = Calendar.getInstance()
   calendar.isLenient = false
-  calendar.set(cmtpDate.year, cmtpDate.month - 1, 1)
+  calendar.set(year, month - 1, 1)
   calendar.add(Calendar.MONTH, 1)
   calendar.add(Calendar.DAY_OF_MONTH, -1)
 

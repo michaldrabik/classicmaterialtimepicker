@@ -27,7 +27,7 @@ data class CmtpDate(
 
   init {
     check(month in CmtpDateData.MONTHS) { "Invalid month. Must be between 1 and 12" }
-    val numberOfDaysInMonth = getNumberOfDays(this)
+    val numberOfDaysInMonth = getNumberOfDays(month, year)
     check(day in 1..numberOfDaysInMonth) { String.format("%s %02d %s", "Invalid day. Must be between 1 and", numberOfDaysInMonth, "for this month and year") }
   }
 

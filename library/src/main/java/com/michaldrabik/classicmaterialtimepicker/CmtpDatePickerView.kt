@@ -119,9 +119,9 @@ open class CmtpDatePickerView @JvmOverloads constructor(
     cmtpRecyclerDays.apply {
       var forceScroll: Boolean = forceScroll
 
-      val maxNumberOfDays = getNumberOfDays(cmtpDate)
+      val maxNumberOfDays = getNumberOfDays(cmtpDate.month, cmtpDate.year)
 
-      if (cmtpDate.day > maxNumberOfDays) {
+      if (cmtpDate.day >= maxNumberOfDays) {
         date = CmtpDate(maxNumberOfDays, cmtpDate.month, cmtpDate.year)
         forceScroll = true
       }
@@ -185,19 +185,24 @@ open class CmtpDatePickerView @JvmOverloads constructor(
       throw java.lang.IllegalStateException("DatePicker view has not been initialized yet.")
     }
 
-    // Force update of index when new month has fewer days than previous month
     var dayIndex = recyclerDaysLayoutManager.getPosition(dayView)
-    if (dayIndex >= recyclerDaysAdapter.getItems().size) {
-      dayIndex = recyclerDaysAdapter.getItems().size - 1
-    }
-
     val monthIndex = recyclerMonthsLayoutManager.getPosition(monthView)
     val yearIndex = recyclerYearsLayoutManager.getPosition(yearView)
 
+    val month = recyclerMonthsAdapter.getItems()[monthIndex].toInt()
+    val year = recyclerYearsAdapter.getItems()[yearIndex].toInt()
+
+    val maxNumberOfDays = getNumberOfDays(month, year)
+    // Force update of index when new month has fewer days than previous month
+    if (dayIndex >= maxNumberOfDays) {
+      dayIndex = maxNumberOfDays - 1
+    }
+
+    val day = recyclerDaysAdapter.getItems()[dayIndex].toInt()
     return CmtpDate(
-      recyclerDaysAdapter.getItems()[dayIndex].toInt(),
-      recyclerMonthsAdapter.getItems()[monthIndex].toInt(),
-      recyclerYearsAdapter.getItems()[yearIndex].toInt()
+      day,
+      month,
+      year
     )
   }
 }
