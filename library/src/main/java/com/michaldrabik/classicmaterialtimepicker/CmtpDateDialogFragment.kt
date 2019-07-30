@@ -6,6 +6,10 @@ import android.view.WindowManager.LayoutParams.WRAP_CONTENT
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpDate
+import java.util.Calendar
+import java.util.Calendar.DAY_OF_MONTH
+import java.util.Calendar.MONTH
+import java.util.Calendar.YEAR
 
 class CmtpDateDialogFragment : DialogFragment() {
 
@@ -99,10 +103,10 @@ class CmtpDateDialogFragment : DialogFragment() {
   }
 
   /**
-   * Set initial date and initialize picker
+   * Set initial date and initialize picker.
    * @param day from 1 to 31 (depending on month).
    * @param month from 1 to 12.
-   * @param year from currentYear-100 to currentYear+100 (default)
+   * @param year from currentYear-100 to currentYear+100 (default).
    * @throws IllegalStateException when given day, month or year is out of valid range.
    */
   fun setInitialDate(day: Int, month: Int, year: Int) {
@@ -110,27 +114,40 @@ class CmtpDateDialogFragment : DialogFragment() {
   }
 
   /**
-   * Set custom range for years
-   * @param startingYear year defining the beginning of the custom range
-   * @param endingYear year defining the end of the custom range
-   * @throws IllegalStateException when given an endingYear smaller than startingYear
+   * Extract initial date out of Calendar instance and initialize picker.
+   * @param calendar Java Calendar instance.
+   * @throws IllegalStateException when given day, month or year is out of valid range.
    */
-  fun setCustomYearRange(startingYear: Int, endingYear: Int) {
-    if (startingYear > endingYear) {
-      throw IllegalStateException("The starting year must be smaller than endingYear")
-    } else {
-      customYearRange = (startingYear..endingYear)
-    }
+  fun setInitialDate(calendar: Calendar) {
+    date = CmtpDate(
+      calendar.get(DAY_OF_MONTH),
+      calendar.get(MONTH),
+      calendar.get(YEAR)
+    )
   }
 
   /**
-   * Set custom separator character for dates
-   * @param separator separator to be used on datepicker
+   * Set custom range for years.
+   * @param startingYear year defining the beginning of the custom range.
+   * @param endingYear year defining the end of the custom range.
+   * @throws IllegalStateException when given an endingYear smaller than startingYear.
+   */
+  fun setCustomYearRange(startingYear: Int, endingYear: Int) {
+    check(startingYear <= endingYear) { "The starting year must be smaller than endingYear" }
+    customYearRange = (startingYear..endingYear)
+  }
+
+  /**
+   * Set custom separator character for dates.
+   * @param separator separator to be used on date picker.
    */
   fun setCustomSeparator(separator: String) {
     customDateSeparator = separator
   }
 
+  /**
+   * Set date picked listener.
+   */
   fun setOnDatePickedListener(listener: OnDatePickedListener) {
     this.onDatePickedListener = listener
   }

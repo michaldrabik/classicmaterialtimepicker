@@ -2,11 +2,15 @@ package com.michaldrabik.classicmaterialtimepicker.utilities
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
-import com.michaldrabik.classicmaterialtimepicker.*
+import com.michaldrabik.classicmaterialtimepicker.CmtpDateDialogFragment
+import com.michaldrabik.classicmaterialtimepicker.CmtpTimeDialogFragment
+import com.michaldrabik.classicmaterialtimepicker.OnDatePickedListener
+import com.michaldrabik.classicmaterialtimepicker.OnTime12PickedListener
+import com.michaldrabik.classicmaterialtimepicker.OnTime24PickedListener
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpDate
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime12
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime24
-import java.util.*
+import java.util.Calendar
 
 fun CmtpTimeDialogFragment.setOnTime12PickedListener(listener: (CmtpTime12) -> Unit) {
   this.setOnTime12PickedListener(object : OnTime12PickedListener {
