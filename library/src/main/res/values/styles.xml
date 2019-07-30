@@ -1,28 +1,28 @@
 <resources>
 
-	<style name="CmtpViewTheme">
-		<item name="cmtpTextFrameDrawable">@drawable/cmtp_bg_frame</item>
-		<item name="cmtpTextSize">16sp</item>
-		<item name="cmtpTextColor">@color/cmtp_black</item>
-	</style>
+  <style name="CmtpViewTheme">
+    <item name="cmtpTextFrameDrawable">@drawable/cmtp_bg_frame</item>
+    <item name="cmtpTextSize">16sp</item>
+    <item name="cmtpTextColor">@color/cmtp_black</item>
+  </style>
 
-	<!-- Dialog -->
+  <!-- Dialog -->
 
-	<style name="CmtpDialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
-		<item name="cmtpDialogFrameStyle">@style/CmtpDialogFrameStyle</item>
-		<item name="buttonBarPositiveButtonStyle">@style/CmtpDialogPositiveButtonStyle</item>
-		<item name="buttonBarNegativeButtonStyle">@style/CmtpDialogNegativeButtonStyle</item>
-		<item name="android:windowBackground">@drawable/cmtp_bg_dialog</item>
-	</style>
+  <style name="CmtpDialogTheme" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+    <item name="cmtpDialogFrameStyle">@style/CmtpDialogFrameStyle</item>
+    <item name="buttonBarPositiveButtonStyle">@style/CmtpDialogPositiveButtonStyle</item>
+    <item name="buttonBarNegativeButtonStyle">@style/CmtpDialogNegativeButtonStyle</item>
+    <item name="android:windowBackground">@drawable/cmtp_bg_dialog</item>
+  </style>
 
-	<style name="CmtpDialogFrameStyle" parent="CmtpDialogTheme" />
+  <style name="CmtpDialogFrameStyle" parent="CmtpDialogTheme"/>
 
-	<style name="CmtpDialogPositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
-		<item name="android:textColor">@color/cmtp_blue</item>
-	</style>
+  <style name="CmtpDialogPositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+    <item name="android:textColor">@color/cmtp_blue</item>
+  </style>
 
-	<style name="CmtpDialogNegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
-		<item name="android:textColor">@color/cmtp_gray</item>
-	</style>
+  <style name="CmtpDialogNegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+    <item name="android:textColor">@color/cmtp_gray</item>
+  </style>
 
 </resources>

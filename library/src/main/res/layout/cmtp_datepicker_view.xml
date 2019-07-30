@@ -17,7 +17,7 @@
   >
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cmtpRecyclerHours"
+        android:id="@+id/cmtpRecyclerDays"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:clipToPadding="false"
@@ -25,10 +25,11 @@
     />
 
     <TextView
+        android:id="@+id/day_month_separator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="1dp"
-        android:text=":"
+        android:text="/"
         android:textColor="?cmtpTextColor"
         android:textSize="?cmtpTextSize"
         android:theme="@style/CmtpViewTheme"
@@ -36,20 +37,31 @@
     />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cmtpRecyclerMinutes"
+        android:id="@+id/cmtpRecyclerMonths"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:overScrollMode="never"
     />
 
+    <TextView
+        android:id="@+id/month_year_separator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="1dp"
+        android:text="/"
+        android:textColor="?cmtpTextColor"
+        android:textSize="?cmtpTextSize"
+        android:theme="@style/CmtpViewTheme"
+        tools:ignore="HardcodedText"
+    />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/cmtpRecyclerPmAm"
+        android:id="@+id/cmtpRecyclerYears"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:overScrollMode="never"
-        android:visibility="gone"
     />
 
   </LinearLayout>

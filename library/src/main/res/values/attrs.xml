@@ -1,7 +1,7 @@
 <resources>
-	<attr name="cmtpTextFrameDrawable" format="reference" />
-	<attr name="cmtpTextSize" format="dimension" />
-	<attr name="cmtpTextColor" format="reference|color" />
+  <attr name="cmtpTextFrameDrawable" format="reference"/>
+  <attr name="cmtpTextSize" format="dimension"/>
+  <attr name="cmtpTextColor" format="reference|color"/>
 
-	<attr name="cmtpDialogFrameStyle" format="reference" />
+  <attr name="cmtpDialogFrameStyle" format="reference"/>
 </resources>

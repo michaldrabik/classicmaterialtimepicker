@@ -28,4 +28,13 @@
 		tools:ignore="HardcodedText"
 		/>
 
+	<Button
+			android:id="@+id/dialogDate"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="8dp"
+			android:text="Show Date Picker"
+			tools:ignore="HardcodedText"
+	/>
+
 </LinearLayout>
