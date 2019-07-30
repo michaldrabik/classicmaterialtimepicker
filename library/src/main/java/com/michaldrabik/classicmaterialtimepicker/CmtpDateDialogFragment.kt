@@ -19,6 +19,7 @@ class CmtpDateDialogFragment : DialogFragment() {
     private const val ARG_DAY = "ARG_DAY"
     private const val ARG_MONTH = "ARG_MONTH"
     private const val ARG_YEAR = "ARG_YEAR"
+    private const val ARG_SEPARATOR = "ARG_SEPARATOR"
 
     /**
      * Create new instance of CmtpDateDialogFragment with CmtpDatePickerView embedded.
@@ -73,6 +74,8 @@ class CmtpDateDialogFragment : DialogFragment() {
     outState.putInt(ARG_DAY, datePicker.getDate().day)
     outState.putInt(ARG_MONTH, datePicker.getDate().month)
     outState.putInt(ARG_YEAR, datePicker.getDate().year)
+
+    outState.putString(ARG_SEPARATOR, customDateSeparator)
   }
 
   private fun restoreState(stateBundle: Bundle) {
@@ -81,6 +84,8 @@ class CmtpDateDialogFragment : DialogFragment() {
     val year = stateBundle.getInt(ARG_YEAR, CmtpDate.DEFAULT.year)
 
     date = CmtpDate(day, month, year)
+
+    customDateSeparator = stateBundle.getString(ARG_SEPARATOR, getString(R.string.default_separator))
   }
 
   override fun onResume() {
