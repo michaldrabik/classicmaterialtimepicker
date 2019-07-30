@@ -117,20 +117,20 @@ open class CmtpDatePickerView @JvmOverloads constructor(
 
   private fun setUpDaysRecyclerBasedOnDate(cmtpDate: CmtpDate, forceScroll: Boolean) {
     cmtpRecyclerDays.apply {
-      var forceScroll: Boolean = forceScroll
+      var scroll: Boolean = forceScroll
 
       val maxNumberOfDays = getNumberOfDays(cmtpDate.month, cmtpDate.year)
 
       if (cmtpDate.day >= maxNumberOfDays) {
         date = CmtpDate(maxNumberOfDays, cmtpDate.month, cmtpDate.year)
-        forceScroll = true
+        scroll = true
       }
 
       val days = (1..maxNumberOfDays)
       recyclerDaysAdapter.setItems(days.map { String.format("%02d", it) })
       recyclerDaysAdapter.notifyDataSetChanged()
 
-      if (forceScroll) {
+      if (scroll) {
         recyclerDaysLayoutManager.scrollToPosition(days.indexOf(date.day))
         smoothScrollBy(0, 1)
       }
