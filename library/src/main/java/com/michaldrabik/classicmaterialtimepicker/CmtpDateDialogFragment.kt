@@ -85,7 +85,7 @@ class CmtpDateDialogFragment : DialogFragment() {
 
     date = CmtpDate(day, month, year)
 
-    customDateSeparator = stateBundle.getString(ARG_SEPARATOR, getString(R.string.default_separator))
+    customDateSeparator = stateBundle.getString(ARG_SEPARATOR, getString(R.string.cmtp_default_separator))
   }
 
   override fun onResume() {
