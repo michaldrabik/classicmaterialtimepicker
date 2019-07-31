@@ -115,6 +115,17 @@ datePicker.setCustomYearRange(2000, 2019)
 datePicker.show(supportFragmentManager, "Tag")
 ```
 
+Selected date can be retrieved with a listener:
+```kotlin
+val datePicker = CmtpDateDialogFragment.newInstance()
+
+// Set date listener.
+timePicker.setOnDatePickedListener { date ->
+  // Do something with picked date.
+})
+timePicker.show(supportFragmentManager, "Tag")
+```
+
 [CmtpTimeDialogFragment](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpTimeDialogFragment.kt) and [CmtpDateDialogFragment](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpDateDialogFragment.kt) are being used as hosts for [CmtpTimePickerView](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpTimePickerView.kt) and [CmtpDatePickerView](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpDatePickerView.kt) views.
 
 You can use those views by itself or host them in a different Android components (like [Bottom Sheet](https://developer.android.com/reference/android/support/design/widget/BottomSheetDialogFragment))
