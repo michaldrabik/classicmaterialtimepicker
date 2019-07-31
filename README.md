@@ -18,9 +18,7 @@ Restyled with **Material 2.0** guidelines and powered by **RecyclerView.**
 https://giant.gfycat.com/LastingImpassionedGelada.webm
 
 ## Setup
-This library is being distributed via [JitPack](http://jitpack.io/)
-
-[AndroidX](https://developer.android.com/jetpack/androidx) libraries are required.
+This library is being distributed via [JitPack](http://jitpack.io/). [AndroidX](https://developer.android.com/jetpack/androidx) libraries are required.
 
 **Step 1:**  
 Add Jitpack repository in root **build.gradle** at the end of repositories:
@@ -139,8 +137,11 @@ See [Sample App styles](https://github.com/michaldrabik/classicmaterialtimepicke
 
 ## Release Notes
 1.1.0:
+
   Added Date picker (thanks to [@victorlsn](https://github.com/victorlsn))
+  
 1.0.0:
+
   Initial Release
 
 ## License
