@@ -39,7 +39,9 @@ dependencies {
 ```
 
 ## Usage
-See [Sample App](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/app/src/main/java/com/michaldrabik/cmtpsample/MainActivity.kt) for full example. You can use this library to pick a time or a date.
+This library can be used to pick time or a date. 
+
+See [Sample App](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/app/src/main/java/com/michaldrabik/cmtpsample/MainActivity.kt) for full example.
 
 ### Time
 
