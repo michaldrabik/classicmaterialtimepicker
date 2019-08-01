@@ -2,10 +2,10 @@
 [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 [![Release](https://jitpack.io/v/michaldrabik/classicmaterialtimepicker.svg)](https://jitpack.io/#michaldrabik/classicmaterialtimepicker)
 
-Classic Material TimePicker
+Classic Material Time & Date Picker
 ===========
 
-Simple, customisable TimePicker created in the "old" Android API 16 style.
+Simple, customisable Time and Date Picker created in the "old" Android API 16 style.
 
 Restyled with **Material 2.0** guidelines and powered by **RecyclerView.**
 
