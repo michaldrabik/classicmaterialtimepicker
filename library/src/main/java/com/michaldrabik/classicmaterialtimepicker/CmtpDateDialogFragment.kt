@@ -6,7 +6,7 @@ import android.view.WindowManager.LayoutParams.WRAP_CONTENT
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpDate
-import java.util.Calendar
+import java.util.*
 import java.util.Calendar.DAY_OF_MONTH
 import java.util.Calendar.MONTH
 import java.util.Calendar.YEAR
@@ -42,6 +42,8 @@ class CmtpDateDialogFragment : DialogFragment() {
   private lateinit var date: CmtpDate
   private lateinit var customYearRange: IntRange
   private lateinit var customDateSeparator: String
+  private lateinit var customMinDate: Calendar
+  private lateinit var customMaxDate: Calendar
   private lateinit var datePicker: CmtpDatePickerView
 
   private lateinit var onDatePickedListener: OnDatePickedListener
@@ -51,8 +53,10 @@ class CmtpDateDialogFragment : DialogFragment() {
 
     datePicker = CmtpDatePickerView(context)
     savedInstanceState?.let { restoreState(it) }
-    if (this::date.isInitialized) datePicker.setDate(date)
+    if (this::customMinDate.isInitialized) datePicker.setMinDate(customMinDate)
+    if (this::customMaxDate.isInitialized) datePicker.setMaxDate(customMaxDate)
     if (this::customYearRange.isInitialized) datePicker.setCustomYearRange(customYearRange)
+    if (this::date.isInitialized) datePicker.setDate(date)
     if (this::customDateSeparator.isInitialized) datePicker.setCustomSeparator(customDateSeparator)
 
     val dialogBuilder = AlertDialog.Builder(context, R.style.CmtpDialogFrameStyle)
@@ -127,14 +131,39 @@ class CmtpDateDialogFragment : DialogFragment() {
   }
 
   /**
-   * Set custom range for years.
+   * Set custom range for years - the custom year range will be disregarded if minDate or maxDate are set.
    * @param startingYear year defining the beginning of the custom range.
    * @param endingYear year defining the end of the custom range.
    * @throws IllegalStateException when given an endingYear smaller than startingYear.
    */
   fun setCustomYearRange(startingYear: Int, endingYear: Int) {
-    check(startingYear <= endingYear) { "The starting year must be smaller than endingYear" }
+    check(startingYear < endingYear) { "The starting year must be smaller than endingYear" }
     customYearRange = (startingYear..endingYear)
+  }
+
+  /**
+   * Set minimum date for date picker. Cannot be used together with custom year range
+   * @param date Date containing minimum day, month and year for the date picker.
+   */
+  fun setMinimumDate(date: Date) {
+    val calendar = Calendar.getInstance()
+    calendar.time = date
+
+    customMinDate = calendar
+
+    setInitialDate(calendar)
+  }
+
+  /**
+   * Set maximum date for date picker. Cannot be used together with custom year range
+   * @param date Date containing maximum day, month and year for the date picker.
+   */
+  fun setMaximumDate(date: Date) {
+    check(!this::customYearRange.isInitialized) {"CustomYearRange can't be used together with MinimumDate and/or MaximumDate"}
+    val calendar = Calendar.getInstance()
+    calendar.time = date
+
+    customMaxDate = calendar
   }
 
   /**
