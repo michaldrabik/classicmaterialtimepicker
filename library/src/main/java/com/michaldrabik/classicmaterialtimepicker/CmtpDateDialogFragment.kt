@@ -145,14 +145,21 @@ class CmtpDateDialogFragment : DialogFragment() {
   /**
    * Set minimum date for date picker. Datepicker will ignore CustomYearRange if this is used
    * @param date Date containing minimum day, month and year for the date picker.
+   * @throws IllegalStateException when minimum date is bigger than maximum date.
    */
   fun setMinimumDate(date: Date) {
+    if (this::customMaxDate.isInitialized) {
+      check(customMaxDate.time >= date) {"Minimum date must be smaller than minimum date"}
+    }
+
     val calendar = Calendar.getInstance()
     calendar.time = date
 
     customMinDate = calendar
 
-    setInitialDate(calendar)
+    if (!this::date.isInitialized) {
+      setInitialDate(calendar)
+    }
   }
 
   /**
@@ -174,9 +181,13 @@ class CmtpDateDialogFragment : DialogFragment() {
   /**
    * Set maximum date for date picker. Datepicker will ignore CustomYearRange if this is used
    * @param date Date containing maximum day, month and year for the date picker.
+   * @throws IllegalStateException when maximum date is smaller than maximum date.
    */
   fun setMaximumDate(date: Date) {
-    check(!this::customYearRange.isInitialized) {"CustomYearRange can't be used together with MinimumDate and/or MaximumDate"}
+    if (this::customMinDate.isInitialized) {
+      check(date >= customMinDate.time) {"Maximum date must be bigger than minimum date"}
+    }
+
     val calendar = Calendar.getInstance()
     calendar.time = date
 

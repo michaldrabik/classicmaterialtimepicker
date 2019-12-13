@@ -248,8 +248,13 @@ open class CmtpDatePickerView @JvmOverloads constructor(
   /**
    * Set minimum date for PickerView. Datepicker will ignore CustomYearRange if this is used
    * @param minDate Date containing minimum day, month and year for the date picker.
+   * @throws IllegalStateException when minimum date is bigger than maximum date.
    */
   fun setMinimumDate(minDate: Calendar) {
+    maxDate?.let {
+      check(it > minDate) {"Minimum date must be smaller than maximum date"}
+    }
+
     this.minDate = minDate
   }
 
@@ -272,8 +277,13 @@ open class CmtpDatePickerView @JvmOverloads constructor(
   /**
    * Set maximum date for PickerView. Datepicker will ignore CustomYearRange if this is used
    * @param maxDate Date containing maximum day, month and year for the date picker.
+   * @throws IllegalStateException when maximum date is smaller than maximum date.
    * */
   fun setMaximumDate(maxDate: Calendar) {
+    minDate?.let {
+      check(maxDate > it) {"Maximum date must be bigger than minimum date"}
+    }
+
     this.maxDate = maxDate
   }
 

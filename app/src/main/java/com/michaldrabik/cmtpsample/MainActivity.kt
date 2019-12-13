@@ -43,16 +43,13 @@ class MainActivity : AppCompatActivity() {
 
   private fun showDateTimePickerDialog() {
     val dialog = CmtpDateDialogFragment.newInstance()
-//
-    val minCal = Calendar.getInstance()
-    minCal.set(2017, 9, 21)
-    dialog.setMinimumDate(minCal.time)
-//
-//    val maxCal = Calendar.getInstance()
-//    maxCal.set(2020, 3, 1)
-//    dialog.setMaximumDate(maxCal.time)
 
-    dialog.setMinimumDate(29, 2, 2000)
+    dialog.setMaximumDate(22, 9, 2021)
+
+    val minCal = Calendar.getInstance()
+    minCal.set(2019, 2, 21)
+    dialog.setMinimumDate(minCal.time)
+
 
     dialog.setCustomSeparator(".")
     dialog.setOnDatePickedListener {
