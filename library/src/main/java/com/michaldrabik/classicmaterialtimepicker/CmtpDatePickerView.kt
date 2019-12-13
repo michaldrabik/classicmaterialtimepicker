@@ -91,7 +91,7 @@ open class CmtpDatePickerView @JvmOverloads constructor(
       )
     }
 
-    setUpYearsRecyclerBasedOnMinimumAndMaximumDate(date, true)
+    setUpYearsRecyclerBasedOnMinimumAndMaximumDate(date)
 
 
     cmtpRecyclerMonths.apply {
@@ -107,13 +107,12 @@ open class CmtpDatePickerView @JvmOverloads constructor(
       )
     }
 
-    setUpMonthsRecyclerBasedOnMinimumAndMaximumDate(date, true)
+    setUpMonthsRecyclerBasedOnMinimumAndMaximumDate(date)
 
 
     // Days RV is setup after month and year because it's necessary to check how many days that specific month has.
     // Also, force scroll is true because it's necessary to adjust the initial position.
-//    setUpDaysRecyclerBasedOnDate(date, true)
-    setUpDaysRecyclerBasedOnMinimumAndMaximumDate(date, true)
+    setUpDaysRecyclerBasedOnMinimumAndMaximumDate(date)
 
     cmtpRecyclerDays.attachSnapHelperWithListener(
       recyclerDaysSnapHelper,
@@ -122,30 +121,7 @@ open class CmtpDatePickerView @JvmOverloads constructor(
     )
   }
 
-//  private fun setUpDaysRecyclerBasedOnDate(cmtpDate: CmtpDate, forceScroll: Boolean) {
-//    cmtpRecyclerDays.apply {
-//      var forceScroll: Boolean = forceScroll
-//
-//      val maxNumberOfDays = getNumberOfDays(cmtpDate.month, cmtpDate.year)
-//
-//      if (cmtpDate.day >= maxNumberOfDays) {
-//        date = CmtpDate(maxNumberOfDays, cmtpDate.month, cmtpDate.year)
-//        forceScroll = true
-//      }
-//
-//      val days = (1..maxNumberOfDays)
-//      recyclerDaysAdapter.setItems(days.map { String.format("%02d", it) })
-//      recyclerDaysAdapter.notifyDataSetChanged()
-//
-//      if (forceScroll) {
-//        recyclerDaysLayoutManager.scrollToPosition(days.indexOf(date.day))
-//        smoothScrollBy(0, 1)
-//      }
-//    }
-//  }
-
-  private fun setUpDaysRecyclerBasedOnMinimumAndMaximumDate(cmtpDate: CmtpDate, forceScroll: Boolean) {
-    var forceScroll = forceScroll
+  private fun setUpDaysRecyclerBasedOnMinimumAndMaximumDate(cmtpDate: CmtpDate) {
     cmtpRecyclerDays.apply {
       val minDay = getMinDay(cmtpDate, minDate)
       val maxDay = getMaxDay(cmtpDate, maxDate)
@@ -153,26 +129,21 @@ open class CmtpDatePickerView @JvmOverloads constructor(
       if (maxDay-minDay+1 != recyclerDaysAdapter.itemCount) {
         if (cmtpDate.day < minDay) {
           date = CmtpDate(minDay, cmtpDate.month, cmtpDate.year)
-          forceScroll = true
         }
         if (cmtpDate.day > maxDay) {
           date = CmtpDate(maxDay, cmtpDate.month, cmtpDate.year)
-          forceScroll = true
         }
 
         val days = (minDay..maxDay)
         recyclerDaysAdapter.setItems(days.map { String.format("%02d", it) })
         recyclerDaysAdapter.notifyDataSetChanged()
-        if (forceScroll) {
-          recyclerDaysLayoutManager.scrollToPosition(days.indexOf(date.day))
-          smoothScrollBy(0, 1)
-        }
+        recyclerDaysLayoutManager.scrollToPosition(days.indexOf(date.day))
+        smoothScrollBy(0, 1)
       }
     }
   }
 
-  private fun setUpMonthsRecyclerBasedOnMinimumAndMaximumDate(cmtpDate: CmtpDate, forceScroll: Boolean) {
-    var forceScroll = forceScroll
+  private fun setUpMonthsRecyclerBasedOnMinimumAndMaximumDate(cmtpDate: CmtpDate) {
     cmtpRecyclerMonths.apply {
       val minMonth = getMinMonth(cmtpDate, minDate)
       val maxMonth = getMaxMonth(cmtpDate, maxDate)
@@ -180,26 +151,21 @@ open class CmtpDatePickerView @JvmOverloads constructor(
       if (maxMonth-minMonth+1 != recyclerMonthsAdapter.itemCount) {
         if (cmtpDate.month < minMonth) {
           date = CmtpDate(cmtpDate.day, minMonth, cmtpDate.year)
-          forceScroll = true
         }
         if (cmtpDate.month > maxMonth) {
           date = CmtpDate(cmtpDate.day, maxMonth, cmtpDate.year)
-          forceScroll = true
         }
 
         val months = (minMonth..maxMonth)
         recyclerMonthsAdapter.setItems(months.map { String.format("%02d", it) })
         recyclerMonthsAdapter.notifyDataSetChanged()
-        if (forceScroll) {
-          recyclerMonthsLayoutManager.scrollToPosition(months.indexOf(date.month))
-          smoothScrollBy(0, 1)
-        }
+        recyclerMonthsLayoutManager.scrollToPosition(months.indexOf(date.month))
+        smoothScrollBy(0, 1)
       }
     }
   }
 
-  private fun setUpYearsRecyclerBasedOnMinimumAndMaximumDate(cmtpDate: CmtpDate, forceScroll: Boolean) {
-    var forceScroll = forceScroll
+  private fun setUpYearsRecyclerBasedOnMinimumAndMaximumDate(cmtpDate: CmtpDate) {
     cmtpRecyclerYears.apply {
       val minYear = getMinYear(minDate)
       val maxYear = getMaxYear(maxDate)
@@ -207,20 +173,16 @@ open class CmtpDatePickerView @JvmOverloads constructor(
       if (minYear != CmtpDateData.YEARS.first || maxYear != CmtpDateData.YEARS.last) {
         if (cmtpDate.year < minYear) {
           date = CmtpDate(cmtpDate.day, cmtpDate.month, minYear)
-          forceScroll = true
         }
         if (cmtpDate.year > maxYear) {
           date = CmtpDate(cmtpDate.day, cmtpDate.month, maxYear)
-          forceScroll = true
         }
 
         val years = (minYear..maxYear)
         recyclerYearsAdapter.setItems(years.map { String.format("%04d", it) })
         recyclerYearsAdapter.notifyDataSetChanged()
-        if (forceScroll) {
-          recyclerYearsLayoutManager.scrollToPosition(years.indexOf(date.year))
-          smoothScrollBy(0, 1)
-        }
+        recyclerYearsLayoutManager.scrollToPosition(years.indexOf(date.year))
+        smoothScrollBy(0, 1)
       }
     }
   }
@@ -229,10 +191,10 @@ open class CmtpDatePickerView @JvmOverloads constructor(
     date = getDate()
 
     if (rv == cmtpRecyclerYears) {
-      setUpMonthsRecyclerBasedOnMinimumAndMaximumDate(date, true)
+      setUpMonthsRecyclerBasedOnMinimumAndMaximumDate(date)
     }
     if (rv != cmtpRecyclerDays) {
-      setUpDaysRecyclerBasedOnMinimumAndMaximumDate(date, true)
+      setUpDaysRecyclerBasedOnMinimumAndMaximumDate(date)
     }
   }
 
@@ -259,7 +221,7 @@ open class CmtpDatePickerView @JvmOverloads constructor(
    * @throws IllegalStateException when given an endingYear smaller than startingYear.
    */
   fun setCustomYearRange(startingYear: Int, endingYear: Int) {
-    check(startingYear <= endingYear) { "The starting year must be smaller than endingYear" }
+    check(startingYear <= endingYear) { "The starting year must be equal to/smaller than endingYear" }
     val yearRange = startingYear..endingYear
     setCustomYearRange(yearRange)
   }
@@ -284,19 +246,51 @@ open class CmtpDatePickerView @JvmOverloads constructor(
   }
 
   /**
-   * Set minimum date for PickerView
+   * Set minimum date for PickerView. Datepicker will ignore CustomYearRange if this is used
    * @param minDate Date containing minimum day, month and year for the date picker.
    */
-  fun setMinDate(minDate: Calendar) {
+  fun setMinimumDate(minDate: Calendar) {
     this.minDate = minDate
   }
 
   /**
-   * Set maximum date for PickerView
+   * Set minimum date for date picker. Datepicker will ignore CustomYearRange if this is used
+   * @param day Int containing minimum day for the date picker.
+   * @param month Int containing minimum month for the date picker.
+   * @param year Int containing minimum year for the date picker.
+   * @throws IllegalStateException when given day or month are out of valid range.
+   */
+  fun setMinimumDate(day: Int, month: Int, year: Int) {
+    check(month in 1..12) {"Month must be between 1 and 12"}
+    check(day in 1..getNumberOfDays(month, year)) {"Day is invalid for this month and year"}
+    val calendar = Calendar.getInstance()
+    calendar.set(year, month, day)
+
+    setMinimumDate(calendar)
+  }
+
+  /**
+   * Set maximum date for PickerView. Datepicker will ignore CustomYearRange if this is used
    * @param maxDate Date containing maximum day, month and year for the date picker.
    * */
-  fun setMaxDate(maxDate: Calendar) {
+  fun setMaximumDate(maxDate: Calendar) {
     this.maxDate = maxDate
+  }
+
+  /**
+   * Set maximum date for date picker. Datepicker will ignore CustomYearRange if this is used
+   * @param day Int containing minimum day for the date picker.
+   * @param month Int containing minimum month for the date picker.
+   * @param year Int containing minimum year for the date picker.
+   * @throws IllegalStateException when given day or month are out of valid range.
+   */
+  fun setMaximumDate(day: Int, month: Int, year: Int) {
+    check(month in 1..12) {"Month must be between 1 and 12"}
+    check(day in 1..getNumberOfDays(month, year)) {"Day is invalid for this month and year"}
+    val calendar = Calendar.getInstance()
+    calendar.set(year, month, day)
+
+    setMaximumDate(calendar)
   }
 
   /**

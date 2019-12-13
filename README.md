@@ -2,10 +2,10 @@
 [![API](https://img.shields.io/badge/API-19%2B-brightgreen.svg?style=flat)](https://android-arsenal.com/api?level=19)
 [![Release](https://jitpack.io/v/michaldrabik/classicmaterialtimepicker.svg)](https://jitpack.io/#michaldrabik/classicmaterialtimepicker)
 
-Classic Material TimePicker
+Classic Material Time & Date Picker
 ===========
 
-Simple, customisable TimePicker created in the "old" Android API 16 style.
+Simple, customisable Time and Date Picker created in the "old" Android API 16 style.
 
 Restyled with **Material 2.0** guidelines and powered by **RecyclerView.**
 
@@ -18,9 +18,7 @@ Restyled with **Material 2.0** guidelines and powered by **RecyclerView.**
 https://giant.gfycat.com/LastingImpassionedGelada.webm
 
 ## Setup
-This library is being distributed via [JitPack](http://jitpack.io/)
-
-[AndroidX](https://developer.android.com/jetpack/androidx) libraries are required.
+This library is being distributed via [JitPack](http://jitpack.io/). [AndroidX](https://developer.android.com/jetpack/androidx) libraries are required.
 
 **Step 1:**  
 Add Jitpack repository in root **build.gradle** at the end of repositories:
@@ -36,21 +34,25 @@ allprojects {
 Add dependency in app project:
 ```groovy
 dependencies {
-  implementation 'com.github.michaldrabik:classicmaterialtimepicker:1.0.0'
+  implementation 'com.github.michaldrabik:classicmaterialtimepicker:1.1.0'
 }
 ```
 
 ## Usage
+This library can be used to pick time or a date. 
+
 See [Sample App](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/app/src/main/java/com/michaldrabik/cmtpsample/MainActivity.kt) for full example.
 
-Create and show time picker's [CmtpDialogFragment](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpTimeDialogFragment.kt):
+### Time
+
+Create and show time picker's [CmtpTimeDialogFragment](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpTimeDialogFragment.kt):
 ```kotlin
-val timePicker = CmtpDialogFragment.newInstance()
-timePicker.show(supportFragmentManager, "TimePickerTag")
+val timePicker = CmtpTimeDialogFragment.newInstance()
+timePicker.show(supportFragmentManager, "Tag")
 ```
 Set initial time with `setInitialTime12()` or `setInitialTime24()` method:
 ```kotlin
-val timePicker = CmtpDialogFragment.newInstance()
+val timePicker = CmtpTimeDialogFragment.newInstance()
 
 // Set initial time and initialise time picker in 12-hour time format.
 timePicker.setInitialTime12(5, 15, PM)
@@ -58,31 +60,105 @@ timePicker.setInitialTime12(5, 15, PM)
 // Set initial time and initialise time picker in 24-hour time format.
 timePicker.setInitialTime24(23, 30)
 
-timePicker.show(supportFragmentManager, "TimePickerTag")
+timePicker.show(supportFragmentManager, "Tag")
 ```
 
 Selected time can be retrieved with one of the listeners:
 ```kotlin
-val timePicker = CmtpDialogFragment.newInstance()
+val timePicker = CmtpTimeDialogFragment.newInstance()
 
 // Set 12-hour time format listener.
 // Use this listener if time picker was initialised in 12-hour format.
 timePicker.setOnTime12PickedListener { time12 ->
   // Do something with picked time.
-})
+}
 
 // Set 24-hour time format listener.
 // Use this listener if time picker was initialised in 24-hour format.
 timePicker.setOnTime24PickedListener { time24 ->
   // Do something with picked time.
-})
+}
 
-timePicker.show(supportFragmentManager, "TimePickerTag")
+timePicker.show(supportFragmentManager, "Tag")
 ```
 
-[CmtpDialogFragment](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpTimeDialogFragment.kt) is being used as a host for [CmtpTimePickerView](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpTimePickerView.kt) view.
+### Date
 
-You can use this view by itself or host it in a different Android component (like [Bottom Sheet](https://developer.android.com/reference/android/support/design/widget/BottomSheetDialogFragment))
+Create and show date picker's [CmtpDateDialogFragment](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpDateDialogFragment.kt):
+```kotlin
+val datePicker = CmtpDateDialogFragment.newInstance()
+datePicker.show(supportFragmentManager, "Tag")
+```
+
+Set initial date with `setInitialDate()` method:
+```kotlin
+val datePicker = CmtpDateDialogFragment.newInstance()
+
+// Set initial date.
+datePicker.setInitialDate(10, 10, 2019)
+datePicker.show(supportFragmentManager, "Tag")
+```
+
+Set custom separator with `setCustomSeparator()` method:
+```kotlin
+val datePicker = CmtpDateDialogFragment.newInstance()
+
+// Set custom separator. "/" is a default.
+datePicker.setCustomSeparator("-")
+datePicker.show(supportFragmentManager, "Tag")
+```
+
+Set custom years range with `setCustomYearRange()` method:
+```kotlin
+val datePicker = CmtpDateDialogFragment.newInstance()
+
+// Set custom years range.
+datePicker.setCustomYearRange(2000, 2019)
+datePicker.show(supportFragmentManager, "Tag")
+```
+
+Set minimum date with `setMinimumDate()` methods:
+```kotlin
+val datePicker = CmtpDateDialogFragment.newInstance()
+
+// Set minimum date using day, month, year
+datePicker.setMinimumDate(20, 3, 2000)
+// Or set minimum date using Date object
+val cal = Calendar.getInstance()
+cal.set(2017, 9, 21)
+datePicker.setMinimumDate(cal.time)
+
+datePicker.show(supportFragmentManager, "Tag")
+```
+
+Set maximum date with `setMaximum()` methods:
+```kotlin
+val datePicker = CmtpDateDialogFragment.newInstance()
+
+// Set maximum date using day, month, year
+datePicker.setMaximumDate(20, 3, 2000)
+// Or set maximum date using Date object
+val cal = Calendar.getInstance()
+cal.set(2017, 9, 21)
+datePicker.setMaximumDate(cal.time)
+
+datePicker.show(supportFragmentManager, "Tag")
+```
+
+Selected date can be retrieved with a listener:
+```kotlin
+val datePicker = CmtpDateDialogFragment.newInstance()
+
+// Set date listener.
+datePicker.setOnDatePickedListener { date ->
+  // Do something with picked date.
+}
+datePicker.show(supportFragmentManager, "Tag")
+```
+
+[CmtpTimeDialogFragment](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpTimeDialogFragment.kt) and [CmtpDateDialogFragment](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpDateDialogFragment.kt) are being used as hosts for [CmtpTimePickerView](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpTimePickerView.kt) and [CmtpDatePickerView](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpDatePickerView.kt) views.
+
+You can use those views by itself or host them in a different Android components (like [Bottom Sheet](https://developer.android.com/reference/android/support/design/widget/BottomSheetDialogFragment))
 
 ## Customization
 Each element of the time picker can be customized:
@@ -138,7 +214,13 @@ Override following style in your app with your own text style:
 See [Sample App styles](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/app/src/main/res/values/styles.xml) for an example of full customization.
 
 ## Release Notes
-1.0.0 - Initial Release
+**1.1.0:**
+
+  Added Date picker (thanks to [@victorlsn](https://github.com/victorlsn))
+  
+**1.0.0:**
+
+  Initial Release
 
 ## License
 
