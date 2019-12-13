@@ -131,7 +131,7 @@ datePicker.setMinimumDate(cal.time)
 datePicker.show(supportFragmentManager, "Tag")
 ```
 
-Set maximum date with `setMaximum()` methods:
+Set maximum date with `setMaximumDate()` methods:
 ```kotlin
 val datePicker = CmtpDateDialogFragment.newInstance()
 
