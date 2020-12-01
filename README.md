@@ -186,6 +186,10 @@ Override following style in your app with your own text style:
 See [Sample App styles](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/app/src/main/res/values/styles.xml) for an example of full customization.
 
 ## Release Notes
+***1.1.1**
+
+  Apply minor bugfixes
+
 **1.1.0:**
 
   Added Date picker (thanks to [@victorlsn](https://github.com/victorlsn))
