@@ -102,7 +102,7 @@ class CmtpTimeDialogFragment : DialogFragment() {
 
   override fun onResume() {
     super.onResume()
-    dialog.window?.let {
+    dialog?.window?.let {
       val width = resources.getDimensionPixelSize(R.dimen.cmtp_timepicker_width)
       it.setLayout(width, WRAP_CONTENT)
     }
