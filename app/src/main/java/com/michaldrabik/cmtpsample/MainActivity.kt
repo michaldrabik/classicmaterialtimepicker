@@ -10,6 +10,7 @@ import com.michaldrabik.classicmaterialtimepicker.utilities.setOnDatePickedListe
 import com.michaldrabik.classicmaterialtimepicker.utilities.setOnTime12PickedListener
 import com.michaldrabik.classicmaterialtimepicker.utilities.setOnTime24PickedListener
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -42,8 +43,14 @@ class MainActivity : AppCompatActivity() {
 
   private fun showDateTimePickerDialog() {
     val dialog = CmtpDateDialogFragment.newInstance()
-    dialog.setInitialDate(1, 6, 1990)
-    dialog.setCustomYearRange(1990, 2020)
+
+    dialog.setMaximumDate(22, 9, 2021)
+
+    val minCal = Calendar.getInstance()
+    minCal.set(2019, 2, 21)
+    dialog.setMinimumDate(minCal.time)
+
+
     dialog.setCustomSeparator(".")
     dialog.setOnDatePickedListener {
       Toast.makeText(this@MainActivity, it.toString(), Toast.LENGTH_SHORT).show()

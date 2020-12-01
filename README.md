@@ -71,13 +71,13 @@ val timePicker = CmtpTimeDialogFragment.newInstance()
 // Use this listener if time picker was initialised in 12-hour format.
 timePicker.setOnTime12PickedListener { time12 ->
   // Do something with picked time.
-})
+}
 
 // Set 24-hour time format listener.
 // Use this listener if time picker was initialised in 24-hour format.
 timePicker.setOnTime24PickedListener { time24 ->
   // Do something with picked time.
-})
+}
 
 timePicker.show(supportFragmentManager, "Tag")
 ```
@@ -117,15 +117,43 @@ datePicker.setCustomYearRange(2000, 2019)
 datePicker.show(supportFragmentManager, "Tag")
 ```
 
+Set minimum date with `setMinimumDate()` methods:
+```kotlin
+val datePicker = CmtpDateDialogFragment.newInstance()
+
+// Set minimum date using day, month, year
+datePicker.setMinimumDate(20, 3, 2000)
+// Or set minimum date using Date object
+val cal = Calendar.getInstance()
+cal.set(2017, 9, 21)
+datePicker.setMinimumDate(cal.time)
+
+datePicker.show(supportFragmentManager, "Tag")
+```
+
+Set maximum date with `setMaximumDate()` methods:
+```kotlin
+val datePicker = CmtpDateDialogFragment.newInstance()
+
+// Set maximum date using day, month, year
+datePicker.setMaximumDate(20, 3, 2000)
+// Or set maximum date using Date object
+val cal = Calendar.getInstance()
+cal.set(2017, 9, 21)
+datePicker.setMaximumDate(cal.time)
+
+datePicker.show(supportFragmentManager, "Tag")
+```
+
 Selected date can be retrieved with a listener:
 ```kotlin
 val datePicker = CmtpDateDialogFragment.newInstance()
 
 // Set date listener.
-timePicker.setOnDatePickedListener { date ->
+datePicker.setOnDatePickedListener { date ->
   // Do something with picked date.
-})
-timePicker.show(supportFragmentManager, "Tag")
+}
+datePicker.show(supportFragmentManager, "Tag")
 ```
 
 [CmtpTimeDialogFragment](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpTimeDialogFragment.kt) and [CmtpDateDialogFragment](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpDateDialogFragment.kt) are being used as hosts for [CmtpTimePickerView](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpTimePickerView.kt) and [CmtpDatePickerView](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/library/src/main/java/com/michaldrabik/classicmaterialtimepicker/CmtpDatePickerView.kt) views.

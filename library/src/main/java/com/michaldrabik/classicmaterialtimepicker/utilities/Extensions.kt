@@ -2,11 +2,8 @@ package com.michaldrabik.classicmaterialtimepicker.utilities
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
-import com.michaldrabik.classicmaterialtimepicker.CmtpDateDialogFragment
-import com.michaldrabik.classicmaterialtimepicker.CmtpTimeDialogFragment
-import com.michaldrabik.classicmaterialtimepicker.OnDatePickedListener
-import com.michaldrabik.classicmaterialtimepicker.OnTime12PickedListener
-import com.michaldrabik.classicmaterialtimepicker.OnTime24PickedListener
+import com.michaldrabik.classicmaterialtimepicker.*
+import com.michaldrabik.classicmaterialtimepicker.CmtpDateData
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpDate
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime12
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpTime24
@@ -39,6 +36,56 @@ fun getNumberOfDays(month: Int, year: Int): Int {
   calendar.add(Calendar.DAY_OF_MONTH, -1)
 
   return calendar.get(Calendar.DAY_OF_MONTH)
+}
+
+fun getMinDay(cmtpDate: CmtpDate, minDate: Calendar?) : Int {
+  if (cmtpDate.year == minDate?.get(Calendar.YEAR)) {
+    if (cmtpDate.month == minDate.get(Calendar.MONTH)) {
+      return minDate.get(Calendar.DAY_OF_MONTH)
+    }
+  }
+  return 1
+}
+
+fun getMaxDay(cmtpDate: CmtpDate, maxDate: Calendar?) : Int {
+  val maxNumberOfDays = getNumberOfDays(cmtpDate.month, cmtpDate.year)
+
+  if (cmtpDate.year == maxDate?.get(Calendar.YEAR)) {
+    if (cmtpDate.month == maxDate.get(Calendar.MONTH)) {
+      if (maxDate.get(Calendar.DAY_OF_MONTH) <= maxNumberOfDays) {
+        return maxDate.get(Calendar.DAY_OF_MONTH)
+      }
+    }
+  }
+  return maxNumberOfDays
+}
+
+fun getMinMonth(cmtpDate: CmtpDate, minDate: Calendar?) : Int {
+  if (cmtpDate.year == minDate?.get(Calendar.YEAR)) {
+    return minDate.get(Calendar.MONTH)
+  }
+  return CmtpDateData.MONTHS.first
+}
+
+fun getMaxMonth(cmtpDate: CmtpDate, maxDate: Calendar?) : Int {
+  if (cmtpDate.year == maxDate?.get(Calendar.YEAR)) {
+    return maxDate.get(Calendar.MONTH)
+  }
+  return CmtpDateData.MONTHS.last
+}
+
+fun getMinYear(minDate: Calendar?) : Int {
+  minDate?.let {
+    return it.get(Calendar.YEAR)
+  }
+  return CmtpDateData.YEARS.first
+}
+
+fun getMaxYear(maxDate: Calendar?) : Int {
+  maxDate?.let {
+    return it.get(Calendar.YEAR)
+  }
+  return CmtpDateData.YEARS.last
 }
 
 fun RecyclerView.attachSnapHelperWithListener(
