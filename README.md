@@ -189,6 +189,7 @@ See [Sample App styles](https://github.com/michaldrabik/classicmaterialtimepicke
 **1.1.2**
 
   Added custom separator `toString()` methods for `CmtpDate` and `CmtpTime` classes.
+  
   Bugfixes
   
 **1.1.1**
