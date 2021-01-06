@@ -188,21 +188,20 @@ See [Sample App styles](https://github.com/michaldrabik/classicmaterialtimepicke
 ## Release Notes
 **1.1.2**
 
-  Added custom separator `toString()` methods for `CmtpDate` and `CmtpTime` classes.
-  
-  Bugfixes
+  - Added custom separator `toString()` methods for `CmtpDate` and `CmtpTime` classes.<br>
+  - Bugfixes
   
 **1.1.1**
 
-  Apply minor bugfixes
+  - Apply minor bugfixes
 
 **1.1.0**
 
-  Added Date picker (thanks to [@victorlsn](https://github.com/victorlsn))
+  - Added Date picker (thanks to [@victorlsn](https://github.com/victorlsn))
   
 **1.0.0**
 
-  Initial Release
+  - Initial Release
 
 ## License
 
