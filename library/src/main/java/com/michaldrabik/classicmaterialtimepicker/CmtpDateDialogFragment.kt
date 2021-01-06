@@ -121,7 +121,7 @@ class CmtpDateDialogFragment : DialogFragment() {
   fun setInitialDate(calendar: Calendar) {
     date = CmtpDate(
       calendar.get(DAY_OF_MONTH),
-      calendar.get(MONTH),
+      calendar.get(MONTH + 1),
       calendar.get(YEAR)
     )
   }
