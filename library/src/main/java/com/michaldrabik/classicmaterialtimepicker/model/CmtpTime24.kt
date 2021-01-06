@@ -20,4 +20,6 @@ data class CmtpTime24(
   override fun getType() = CmtpTimeType.HOUR_24
 
   override fun toString() = String.format("%02d:%02d", hour, minute)
+
+  fun toString(separator: String) = String.format("%02d$separator%02d", hour, minute)
 }

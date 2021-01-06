@@ -28,4 +28,6 @@ data class CmtpDate(
   }
 
   override fun toString() = String.format("%02d/%02d/%04d", day, month, year)
+
+  fun toString(separator: String) = String.format("%02d$separator%02d$separator%04d", day, month, year)
 }

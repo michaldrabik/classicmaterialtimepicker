@@ -23,5 +23,7 @@ data class CmtpTime12(
 
   override fun toString() = String.format("%02d:%02d:%s", hour, minute, pmAm.name)
 
+  fun toString(separator: String) = String.format("%02d$separator%02d$separator%s", hour, minute, pmAm.name)
+
   enum class PmAm { PM, AM }
 }
