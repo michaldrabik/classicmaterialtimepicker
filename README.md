@@ -34,7 +34,7 @@ allprojects {
 Add dependency in app project:
 ```groovy
 dependencies {
-  implementation 'com.github.michaldrabik:classicmaterialtimepicker:1.1.1'
+  implementation 'com.github.michaldrabik:classicmaterialtimepicker:1.1.2'
 }
 ```
 
@@ -186,6 +186,11 @@ Override following style in your app with your own text style:
 See [Sample App styles](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/app/src/main/res/values/styles.xml) for an example of full customization.
 
 ## Release Notes
+**1.1.2**
+
+  Added custom separator `toString()` methods for `CmtpDate` and `CmtpTime` classes.
+  Bugfixes
+  
 **1.1.1**
 
   Apply minor bugfixes
