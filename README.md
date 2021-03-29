@@ -34,7 +34,7 @@ allprojects {
 Add dependency in app project:
 ```groovy
 dependencies {
-  implementation 'com.github.michaldrabik:classicmaterialtimepicker:1.1.2'
+  implementation 'com.github.michaldrabik:classicmaterialtimepicker:1.1.3'
 }
 ```
 
