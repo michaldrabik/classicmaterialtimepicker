@@ -2,6 +2,7 @@ package com.michaldrabik.classicmaterialtimepicker
 
 import android.app.Dialog
 import android.os.Bundle
+import android.util.Log
 import android.view.WindowManager.LayoutParams.WRAP_CONTENT
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
@@ -121,7 +122,7 @@ class CmtpDateDialogFragment : DialogFragment() {
   fun setInitialDate(calendar: Calendar) {
     date = CmtpDate(
       calendar.get(DAY_OF_MONTH),
-      calendar.get(MONTH + 1),
+      calendar.get(MONTH) + 1,
       calendar.get(YEAR)
     )
   }
