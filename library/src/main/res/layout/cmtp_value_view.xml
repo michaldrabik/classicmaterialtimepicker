@@ -3,19 +3,18 @@
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:tools="http://schemas.android.com/tools"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent"
+	android:layout_height="wrap_content"
 	tools:parentTag="android.widget.FrameLayout"
 	>
 
 	<TextView
 		android:id="@+id/cmtpTimeNumberValue"
-		android:layout_width="wrap_content"
+		android:layout_width="match_parent"
 		android:layout_height="wrap_content"
-		android:layout_marginLeft="16dp"
 		android:layout_marginTop="8dp"
-		android:layout_marginRight="16dp"
 		android:layout_marginBottom="8dp"
 		android:ellipsize="none"
+		android:gravity="center"
 		android:singleLine="true"
 		android:textColor="?cmtpTextColor"
 		android:textSize="?cmtpTextSize"
