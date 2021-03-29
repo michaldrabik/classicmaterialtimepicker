@@ -62,6 +62,7 @@
 			android:id="@+id/cmtpRecyclerYears"
 			android:layout_width="wrap_content"
 			android:layout_height="match_parent"
+			android:layout_marginStart="8dp"
 			android:clipToPadding="false"
 			android:minWidth="50dp"
 			android:overScrollMode="never"
