@@ -186,6 +186,10 @@ Override following style in your app with your own text style:
 See [Sample App styles](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/app/src/main/res/values/styles.xml) for an example of full customization.
 
 ## Release Notes
+**1.1.3**
+
+  - Time values font size bugfix
+
 **1.1.2**
 
   - Added custom separator `toString()` methods for `CmtpDate` and `CmtpTime` classes.<br>
