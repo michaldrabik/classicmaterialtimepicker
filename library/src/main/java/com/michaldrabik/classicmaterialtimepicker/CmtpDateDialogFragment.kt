@@ -76,6 +76,7 @@ class CmtpDateDialogFragment : DialogFragment() {
     outState.putInt(ARG_MONTH, datePicker.getDate().month)
     outState.putInt(ARG_YEAR, datePicker.getDate().year)
 
+    if(::customDateSeparator.isInitialized)
     outState.putString(ARG_SEPARATOR, customDateSeparator)
   }
 
