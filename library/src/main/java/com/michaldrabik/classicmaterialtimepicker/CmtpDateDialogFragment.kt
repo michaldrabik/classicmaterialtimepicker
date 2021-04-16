@@ -2,15 +2,12 @@ package com.michaldrabik.classicmaterialtimepicker
 
 import android.app.Dialog
 import android.os.Bundle
-import android.util.Log
 import android.view.WindowManager.LayoutParams.WRAP_CONTENT
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import com.michaldrabik.classicmaterialtimepicker.model.CmtpDate
-import java.util.Calendar
-import java.util.Calendar.DAY_OF_MONTH
-import java.util.Calendar.MONTH
-import java.util.Calendar.YEAR
+import java.util.*
+import java.util.Calendar.*
 
 class CmtpDateDialogFragment : DialogFragment() {
 
@@ -52,9 +49,9 @@ class CmtpDateDialogFragment : DialogFragment() {
 
     datePicker = CmtpDatePickerView(context)
     savedInstanceState?.let { restoreState(it) }
-    if (this::date.isInitialized) datePicker.setDate(date)
-    if (this::customYearRange.isInitialized) datePicker.setCustomYearRange(customYearRange)
-    if (this::customDateSeparator.isInitialized) datePicker.setCustomSeparator(customDateSeparator)
+    if (::date.isInitialized) datePicker.setDate(date)
+    if (::customYearRange.isInitialized) datePicker.setCustomYearRange(customYearRange)
+    if (::customDateSeparator.isInitialized) datePicker.setCustomSeparator(customDateSeparator)
 
     val dialogBuilder = AlertDialog.Builder(context, R.style.CmtpDialogFrameStyle)
     dialogBuilder.setView(datePicker)
@@ -71,13 +68,15 @@ class CmtpDateDialogFragment : DialogFragment() {
   }
 
   private fun saveState(outState: Bundle) {
-    if (!this::datePicker.isInitialized) return
+    if (!::datePicker.isInitialized) return
+
     outState.putInt(ARG_DAY, datePicker.getDate().day)
     outState.putInt(ARG_MONTH, datePicker.getDate().month)
     outState.putInt(ARG_YEAR, datePicker.getDate().year)
 
-    if(::customDateSeparator.isInitialized)
-    outState.putString(ARG_SEPARATOR, customDateSeparator)
+    if (::customDateSeparator.isInitialized) {
+      outState.putString(ARG_SEPARATOR, customDateSeparator)
+    }
   }
 
   private fun restoreState(stateBundle: Bundle) {
@@ -86,7 +85,6 @@ class CmtpDateDialogFragment : DialogFragment() {
     val year = stateBundle.getInt(ARG_YEAR, CmtpDate.DEFAULT.year)
 
     date = CmtpDate(day, month, year)
-
     customDateSeparator = stateBundle.getString(ARG_SEPARATOR, getString(R.string.cmtp_default_separator))
   }
 
@@ -99,7 +97,7 @@ class CmtpDateDialogFragment : DialogFragment() {
   }
 
   private fun onDatePicked() {
-    if (this::onDatePickedListener.isInitialized) {
+    if (::onDatePickedListener.isInitialized) {
       onDatePickedListener.onDatePicked(datePicker.getDate())
     }
   }
