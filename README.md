@@ -186,6 +186,10 @@ Override following style in your app with your own text style:
 See [Sample App styles](https://github.com/michaldrabik/classicmaterialtimepicker/blob/master/app/src/main/res/values/styles.xml) for an example of full customization.
 
 ## Release Notes
+**1.1.4**
+
+  - Fixed state restoration bug
+
 **1.1.3**
 
   - Time values font size bugfix
