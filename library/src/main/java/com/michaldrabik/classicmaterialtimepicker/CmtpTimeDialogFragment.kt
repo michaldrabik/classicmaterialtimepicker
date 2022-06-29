@@ -41,6 +41,7 @@ class CmtpTimeDialogFragment : DialogFragment() {
   }
 
   private lateinit var time: CmtpTime
+  private var minuteStep = 1
   private lateinit var timePicker: CmtpTimePickerView
 
   private lateinit var onTime12PickedListener: OnTime12PickedListener
@@ -52,6 +53,7 @@ class CmtpTimeDialogFragment : DialogFragment() {
     timePicker = CmtpTimePickerView(context)
     savedInstanceState?.let { restoreState(it) }
     if (this::time.isInitialized) timePicker.setTime(time)
+    timePicker.setMinuteStep(minuteStep)
 
     val dialogBuilder = AlertDialog.Builder(context, R.style.CmtpDialogFrameStyle)
     dialogBuilder.setView(timePicker)
@@ -142,6 +144,16 @@ class CmtpTimeDialogFragment : DialogFragment() {
    */
   fun setInitialTime24(hour: Int, minute: Int) {
     time = CmtpTime24(hour, minute)
+  }
+
+  /**
+   * Set Minute steps
+   * @param step from 0 to 59.
+   * @throws IllegalStateException when given step is out of valid range.
+   */
+  fun setMinuteStep(step:Int) {
+    check(step in CmtpTimeData.MINUTES) { "Invalid minute. Must be between 0 and 59" }
+    minuteStep = step
   }
 
   /**

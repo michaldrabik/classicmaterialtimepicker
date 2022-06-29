@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
   private fun showTime12PickerDialog() {
     val dialog = CmtpTimeDialogFragment.newInstance()
     dialog.setInitialTime12(5, 15, PM)
+    dialog.setMinuteStep(30)
     dialog.setOnTime12PickedListener {
       Toast.makeText(this@MainActivity, it.toString(), Toast.LENGTH_SHORT).show()
     }

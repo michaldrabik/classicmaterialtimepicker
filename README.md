@@ -79,6 +79,11 @@ timePicker.setOnTime24PickedListener { time24 ->
   // Do something with picked time.
 })
 
+
+// Set minute steps
+// Use this to set steps between minutes
+timePicker.setMinuteStep(30)
+
 timePicker.show(supportFragmentManager, "Tag")
 ```
 
